@@ -2,9 +2,48 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Mon Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio de Mo3ez</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Bienvenue sur mon portfolio !</h1>
+  <header>
+    <h1>Salut, je suis Mo3ez !</h1>
+    <p>Bienvenue sur mon portfolio 🚀</p>
+  </header>
+
+  <main>
+    <section class="buttons">
+      <button onclick="showSection('cv')">Mon CV</button>
+      <button onclick="showSection('about')">Qui suis-je ?</button>
+      <button onclick="showSection('projects')">Mes Projets</button>
+    </section>
+
+    <section id="cv" class="content-section hidden">
+      <h2>Mon CV 📄</h2>
+      <p>Tu peux télécharger mon CV ici :</p>
+      <a href="https://example.com/cv.pdf" target="_blank" class="link-button">Télécharger CV</a>
+    </section>
+
+    <section id="about" class="content-section hidden">
+      <h2>Qui suis-je ? 🤓</h2>
+      <p>Je suis un développeur passionné, toujours à la recherche de projets excitants. J'aime coder, créer des sites et explorer de nouvelles technologies !</p>
+    </section>
+
+    <section id="projects" class="content-section hidden">
+      <h2>Mes Projets 💻</h2>
+      <ul>
+        <li><a href="https://github.com/Mo3ez/projet1" target="_blank">Projet 1 - Portfolio interactif</a></li>
+        <li><a href="https://github.com/Mo3ez/projet2" target="_blank">Projet 2 - Jeu en JavaScript</a></li>
+        <li><a href="https://github.com/Mo3ez/projet3" target="_blank">Projet 3 - API Web</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Mo3ez. Tous droits réservés.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
