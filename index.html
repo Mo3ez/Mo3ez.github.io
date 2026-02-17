@@ -2,59 +2,59 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <title>Abdelmouez Amine | Cybersecurity</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Interactif de Mo3ez</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>Salut, je suis Mo3ez !</h1>
-    <p>Bienvenue sur mon portfolio interactif 🚀</p>
-  </header>
+<div class="cursor"></div>
 
-  <main>
-    <div class="button-container">
-      <button class="magic-btn" onclick="showSection('cv')">Mon CV</button>
-      <button class="magic-btn" onclick="showSection('about')">Qui suis-je ?</button>
-      <button class="magic-btn" onclick="showSection('projects')">Mes Projets</button>
-      <button class="magic-btn reset-btn" onclick="resetPortfolio()">Reset 🔄</button>
-    </div>
+<header>
+  <h1 class="glitch" data-text="ABDELMOUEZ AMINE">ABDELMOUEZ AMINE</h1>
+  <p>Cybersecurity • Pentester • Red Team</p>
+  <a href="#about" class="btn">Découvrir</a>
+</header>
 
-    <section id="cv" class="content-section hidden">
-      <h2>Mon CV 📄</h2>
-      <p>Tu peux télécharger mon CV ici :</p>
-      <a href="https://example.com/cv.pdf" target="_blank" class="link-button">Télécharger CV</a>
-    </section>
+<section id="about">
+  <h2>À propos</h2>
+  <p>
+    Passionné par la cybersécurité, la détection d’intrusions et les tests d’intrusion.
+    Spécialisé en sécurité offensive, analyse de vulnérabilités et protection des systèmes.
+  </p>
+</section>
 
-    <section id="about" class="content-section hidden">
-      <h2>Qui suis-je ? 🤓</h2>
-      <p>Je suis un développeur passionné, j’adore coder, créer des projets fun et apprendre de nouvelles technologies !</p>
-    </section>
+<section id="skills">
+  <h2>Compétences</h2>
+  <div class="cards">
+    <div class="card">Pentesting</div>
+    <div class="card">Red Team</div>
+    <div class="card">Network Security</div>
+    <div class="card">Linux / Windows</div>
+    <div class="card">Python / Bash</div>
+  </div>
+</section>
 
-    <section id="projects" class="content-section hidden">
-      <h2>Mes Projets 💻</h2>
-      <div class="projects-grid">
-        <a href="https://github.com/Mo3ez/projet1" target="_blank" class="project-card">
-          <h3>Projet 1</h3>
-          <p>Portfolio interactif</p>
-        </a>
-        <a href="https://github.com/Mo3ez/projet2" target="_blank" class="project-card">
-          <h3>Projet 2</h3>
-          <p>Jeu en JavaScript</p>
-        </a>
-        <a href="https://github.com/Mo3ez/projet3" target="_blank" class="project-card">
-          <h3>Projet 3</h3>
-          <p>API Web</p>
-        </a>
-      </div>
-    </section>
-  </main>
+<section id="projects">
+  <h2>Projets</h2>
+  <div class="cards">
+    <div class="card">Audit Web App</div>
+    <div class="card">CTF Writeups</div>
+    <div class="card">Lab Active Directory</div>
+  </div>
+</section>
 
-  <footer>
-    <p>© 2026 Mo3ez. Tous droits réservés.</p>
-  </footer>
+<section id="cv">
+  <h2>Mon CV</h2>
+  <a href="assets/cv.pdf" download class="btn download-btn">
+    Télécharger mon CV
+  </a>
+</section>
 
-  <script src="script.js"></script>
+<footer>
+  <p>© 2026 Abdelmouez Amine | Cybersecurity Portfolio</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
