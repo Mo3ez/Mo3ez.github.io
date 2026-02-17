@@ -1,91 +1,145 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdelmouez Amine | Cybersecurity</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Abdelmouez Amine | Pentester Red Team</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Curseur personnalisé (visible sur desktop) -->
+  <div class="cursor"></div>
 
-<canvas id="matrix"></canvas>
-<div class="cursor"></div>
+  <!-- Canvas pour fond Matrix animé -->
+  <canvas id="matrix"></canvas>
 
-<nav>
-  <div class="logo glitch" data-text="AA">AA</div>
-  <div class="nav-links">
-    <a href="#about">Profil</a>
-    <a href="#skills">Compétences</a>
-    <a href="#experience">Expérience</a>
-    <a href="#stats">Stats</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+  <!-- Navigation fixe -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#header" class="nav-link">Accueil</a></li>
+      <li><a href="#profil" class="nav-link">Profil</a></li>
+      <li><a href="#competences" class="nav-link">Compétences</a></li>
+      <li><a href="#experiences" class="nav-link">Expériences</a></li>
+      <li><a href="#statistiques" class="nav-link">Stats</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
 
-<header>
-  <h1 class="glitch" data-text="ABDELMOUEZ AMINE">ABDELMOUEZ AMINE</h1>
-  <p>Cybersecurity • Pentester • Red Team</p>
-  <a href="assets/cv.pdf" download class="btn download-btn">Télécharger CV</a>
-</header>
+  <!-- Contenu principal -->
+  <main>
+    <!-- Header -->
+    <section id="header" class="section header-section">
+      <div class="container">
+        <h1 class="glitch" data-text="ABDELMOUEZ AMINE">ABDELMOUEZ AMINE</h1>
+        <p class="subtitle">Cybersecurity • Pentester • Red Team</p>
+        <a href="assets/cv.pdf" download class="btn btn-cv" id="download-cv">
+          <i class="fas fa-download"></i> Télécharger CV
+        </a>
+      </div>
+    </section>
 
-<section id="about">
-  <h2>PROFIL</h2>
-  <p>
-    Étudiant en BTS CIEL – futur élève ingénieur ESIEA.  
-    Passionné par la cybersécurité offensive, je me spécialise en pentesting, analyse de vulnérabilités et sécurité réseau.  
-    Objectif : évoluer vers un poste en Red Team / Offensive Security.
-  </p>
-</section>
+    <!-- Profil -->
+    <section id="profil" class="section">
+      <div class="container">
+        <h2 class="section-title">Profil</h2>
+        <div class="profil-content">
+          <p>Étudiant passionné en cybersécurité offensive, spécialisé en tests d'intrusion et Red Team. Je combine un Home Lab actif (5 machines virtuelles) avec une pratique quotidienne sur Root-Me (350+ points) et des CTFs. Actuellement en préparation de la certification eJPT. Je recherche une alternance pour mettre mes compétences au service d'équipes offensives.</p>
+        </div>
+      </div>
+    </section>
 
-<section id="skills">
-  <h2>COMPÉTENCES</h2>
-  <div class="grid">
-    <div class="card">Cybersécurité</div>
-    <div class="card">Pentesting</div>
-    <div class="card">Python & Automatisation</div>
-    <div class="card">Réseaux & Cisco</div>
-    <div class="card">Linux / Windows</div>
-    <div class="card">Active Directory</div>
-  </div>
-</section>
+    <!-- Compétences -->
+    <section id="competences" class="section">
+      <div class="container">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid">
+          <div class="skill-card"><i class="fab fa-python"></i> Python</div>
+          <div class="skill-card"><i class="fas fa-code"></i> HTML/CSS/JS</div>
+          <div class="skill-card"><i class="fas fa-network-wired"></i> Réseaux</div>
+          <div class="skill-card"><i class="fab fa-linux"></i> Linux/Windows</div>
+          <div class="skill-card"><i class="fas fa-server"></i> Active Directory</div>
+          <div class="skill-card"><i class="fas fa-bug"></i> Pentesting</div>
+          <div class="skill-card"><i class="fas fa-shield-alt"></i> Analyse vulnérabilités</div>
+          <div class="skill-card"><i class="fas fa-robot"></i> Automatisation</div>
+        </div>
+      </div>
+    </section>
 
-<section id="experience">
-  <h2>EXPÉRIENCE</h2>
-  <div class="terminal">
-<pre>
-> Stage Iboo-Technologies (2025)
-  - Audit sécurité réseau & système
-  - Campagne phishing interne
-  - Scripts d'automatisation
-  - Intune / Azure / AD
+    <!-- Expériences (avec terminal interactif) -->
+    <section id="experiences" class="section">
+      <div class="container">
+        <h2 class="section-title">Expériences</h2>
+        <div class="terminal" id="interactive-terminal">
+          <div class="terminal-header">
+            <span class="terminal-title">user@abdelmouez:~/exp</span>
+            <span class="terminal-controls">✕</span>
+          </div>
+          <div class="terminal-body" id="terminal-body">
+            <div class="line">$ cat experience.log</div>
+            <div class="line">[2025] Stage Iboo-Technologies</div>
+            <div class="line">  → Tests d'intrusion sur applications web</div>
+            <div class="line">  → Rédaction de rapports de vulnérabilités</div>
+            <div class="line">  → Outils d'automatisation en Python</div>
+            <div class="line">[CTF] Root-Me (350+ pts) & HackTheBox</div>
+            <div class="line">[Home Lab] 5 VMs (AD, Linux, SIEM)</div>
+            <div class="line">$ <span class="cursor-blink">_</span></div>
+          </div>
+          <div class="terminal-input-line">
+            <span class="prompt">$</span>
+            <input type="text" id="terminal-input" placeholder="Tapez help" autocomplete="off">
+          </div>
+        </div>
+        <p class="terminal-hint">* Tapez <strong>help</strong> dans le terminal pour plus d'infos</p>
+      </div>
+    </section>
 
-> Pratique Root-Me (350+ points)
-> CTF & Home Lab personnel
-> Certification EJPT (en cours)
-</pre>
-  </div>
-</section>
+    <!-- Statistiques animées -->
+    <section id="statistiques" class="section">
+      <div class="container">
+        <h2 class="section-title">Statistiques</h2>
+        <div class="stats-container">
+          <div class="stat-item">
+            <i class="fas fa-flag"></i>
+            <span class="stat-number" data-target="350">0</span>
+            <span class="stat-label">Root-Me points</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-certificate"></i>
+            <span class="stat-number" data-target="1">0</span>
+            <span class="stat-label">Certification (eJPT en cours)</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-server"></i>
+            <span class="stat-number" data-target="5">0</span>
+            <span class="stat-label">Projets Home Lab</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="stats">
-  <h2>STATISTIQUES</h2>
-  <div class="stats-grid">
-    <div class="stat"><span class="count" data-target="350">0</span> Root-Me Points</div>
-    <div class="stat"><span class="count" data-target="1">0</span> Certifications (EJPT)</div>
-    <div class="stat"><span class="count" data-target="5">0</span> Projets Home Lab</div>
-  </div>
-</section>
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-info">
+          <p><i class="fas fa-map-marker-alt"></i> Angers, France</p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:a.amine@cybermail.com">a.amine@cybermail.com</a></p>
+          <p><i class="fas fa-briefcase"></i> Recherche alternance cybersécurité offensive</p>
+        </div>
+      </div>
+    </section>
 
-<section id="contact">
-  <h2>CONTACT</h2>
-  <p>Angers</p>
-  <p>abdelmouezamine@gmail.com</p>
-  <p>Recherche alternance cybersécurité</p>
-</section>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>© 2025 Abdelmouez Amine — Conçu avec <i class="fas fa-heart" style="color: #ff3366;"></i> pour le Red Team</p>
+      </div>
+    </footer>
+  </main>
 
-<footer>
-  © 2026 Abdelmouez Amine — Cybersecurity Portfolio
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
