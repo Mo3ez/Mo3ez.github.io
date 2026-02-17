@@ -1,20 +1,21 @@
-// Curseur animé
-const cursor = document.querySelector(".cursor");
+// Curseur custom seulement sur desktop
+if (window.innerWidth > 768) {
+  const cursor = document.querySelector(".cursor");
 
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.pageX + "px";
-  cursor.style.top = e.pageY + "px";
-});
+  document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+} else {
+  document.querySelector(".cursor").style.display = "none";
+}
 
-// Animation téléchargement CV
-const downloadBtn = document.querySelector(".download-btn");
+// Animation bouton CV
+const btn = document.querySelector(".download-btn");
 
-downloadBtn.addEventListener("click", () => {
-  downloadBtn.innerText = "Téléchargement...";
-  downloadBtn.style.background = "#00ff88";
-  downloadBtn.style.color = "#000";
-
+btn.addEventListener("click", () => {
+  btn.innerText = "Téléchargement...";
   setTimeout(() => {
-    downloadBtn.innerText = "Téléchargé ✔";
+    btn.innerText = "Téléchargé ✔";
   }, 1500);
 });
