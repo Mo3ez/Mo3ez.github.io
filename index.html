@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio de Mo3ez</title>
+  <title>Portfolio Interactif de Mo3ez</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <header>
     <h1>Salut, je suis Mo3ez !</h1>
-    <p>Bienvenue sur mon portfolio 🚀</p>
+    <p>Bienvenue sur mon portfolio interactif 🚀</p>
   </header>
 
   <main>
-    <section class="buttons">
-      <button onclick="showSection('cv')">Mon CV</button>
-      <button onclick="showSection('about')">Qui suis-je ?</button>
-      <button onclick="showSection('projects')">Mes Projets</button>
-    </section>
+    <div class="button-container">
+      <button class="magic-btn" onclick="showSection('cv')">Mon CV</button>
+      <button class="magic-btn" onclick="showSection('about')">Qui suis-je ?</button>
+      <button class="magic-btn" onclick="showSection('projects')">Mes Projets</button>
+      <button class="magic-btn reset-btn" onclick="resetPortfolio()">Reset 🔄</button>
+    </div>
 
     <section id="cv" class="content-section hidden">
       <h2>Mon CV 📄</h2>
@@ -27,16 +29,25 @@
 
     <section id="about" class="content-section hidden">
       <h2>Qui suis-je ? 🤓</h2>
-      <p>Je suis un développeur passionné, toujours à la recherche de projets excitants. J'aime coder, créer des sites et explorer de nouvelles technologies !</p>
+      <p>Je suis un développeur passionné, j’adore coder, créer des projets fun et apprendre de nouvelles technologies !</p>
     </section>
 
     <section id="projects" class="content-section hidden">
       <h2>Mes Projets 💻</h2>
-      <ul>
-        <li><a href="https://github.com/Mo3ez/projet1" target="_blank">Projet 1 - Portfolio interactif</a></li>
-        <li><a href="https://github.com/Mo3ez/projet2" target="_blank">Projet 2 - Jeu en JavaScript</a></li>
-        <li><a href="https://github.com/Mo3ez/projet3" target="_blank">Projet 3 - API Web</a></li>
-      </ul>
+      <div class="projects-grid">
+        <a href="https://github.com/Mo3ez/projet1" target="_blank" class="project-card">
+          <h3>Projet 1</h3>
+          <p>Portfolio interactif</p>
+        </a>
+        <a href="https://github.com/Mo3ez/projet2" target="_blank" class="project-card">
+          <h3>Projet 2</h3>
+          <p>Jeu en JavaScript</p>
+        </a>
+        <a href="https://github.com/Mo3ez/projet3" target="_blank" class="project-card">
+          <h3>Projet 3</h3>
+          <p>API Web</p>
+        </a>
+      </div>
     </section>
   </main>
 
