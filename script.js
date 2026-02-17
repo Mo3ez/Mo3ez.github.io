@@ -1,18 +1,20 @@
-function showSection(sectionId) {
-  const sections = document.querySelectorAll('.content-section');
-  sections.forEach(section => {
-    if(section.id === sectionId) {
-      section.classList.remove('hidden');
-      section.scrollIntoView({behavior: 'smooth'});
-    } else {
-      section.classList.add('hidden');
-    }
-  });
-}
+// Curseur animé
+const cursor = document.querySelector(".cursor");
 
-// Reset tout
-function resetPortfolio() {
-  const sections = document.querySelectorAll('.content-section');
-  sections.forEach(section => section.classList.add('hidden'));
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.pageX + "px";
+  cursor.style.top = e.pageY + "px";
+});
+
+// Animation téléchargement CV
+const downloadBtn = document.querySelector(".download-btn");
+
+downloadBtn.addEventListener("click", () => {
+  downloadBtn.innerText = "Téléchargement...";
+  downloadBtn.style.background = "#00ff88";
+  downloadBtn.style.color = "#000";
+
+  setTimeout(() => {
+    downloadBtn.innerText = "Téléchargé ✔";
+  }, 1500);
+});
