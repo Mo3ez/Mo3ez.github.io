@@ -1,139 +1,83 @@
-/* ===== Reset & Base ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Consolas", monospace;
 }
 
 body {
-  background: linear-gradient(135deg, #6b73ff, #000dff);
-  color: #fff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: background 0.5s;
+  background: #0a0f0d;
+  color: #00ff88;
+  overflow-x: hidden;
 }
 
 header {
-  padding: 50px 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #001a11, #000);
+  text-align: center;
 }
 
-header h1 {
+h1 {
   font-size: 3rem;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 15px #000;
-  animation: fadeInDown 1s ease-out;
+  letter-spacing: 3px;
 }
 
-header p {
-  font-size: 1.5rem;
-  color: #ddd;
-  animation: fadeInUp 1s ease-out;
+h2 {
+  margin-bottom: 20px;
 }
 
-/* ===== Boutons ===== */
-.button-container {
-  margin: 30px 0;
+section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  border: 2px solid #00ff88;
+  color: #00ff88;
+  text-decoration: none;
+  transition: 0.3s;
+  position: relative;
+}
+
+.btn:hover {
+  background: #00ff88;
+  color: #000;
+  box-shadow: 0 0 20px #00ff88;
+}
+
+.cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
 }
 
-.magic-btn {
-  background: linear-gradient(45deg, #ff5722, #ff784e);
-  border: none;
-  padding: 15px 30px;
-  border-radius: 50px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: 0.4s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.magic-btn:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-.reset-btn {
-  background: #00e676;
-}
-
-/* ===== Sections ===== */
-.content-section {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 25px;
-  background: rgba(0,0,0,0.6);
-  border-radius: 15px;
-  transition: all 0.5s;
-  opacity: 1;
-}
-
-.hidden {
-  display: none;
-  opacity: 0;
-}
-
-/* ===== Liens ===== */
-.link-button {
-  display: inline-block;
-  padding: 10px 25px;
-  background: #00bcd4;
-  color: #fff;
-  border-radius: 30px;
-  text-decoration: none;
-  margin-top: 10px;
+.card {
+  padding: 20px;
+  border: 1px solid #00ff88;
+  width: 200px;
   transition: 0.3s;
 }
 
-.link-button:hover {
-  background: #26c6da;
-  transform: scale(1.05);
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 15px #00ff88;
 }
 
-/* ===== Projets ===== */
-.projects-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-}
-
-.project-card {
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 15px;
-  width: 200px;
-  text-decoration: none;
-  color: #fff;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.project-card:hover {
-  transform: scale(1.1);
-  background: rgba(255,255,255,0.2);
-}
-
-/* ===== Footer ===== */
-footer {
-  margin-top: auto;
-  padding: 20px;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-/* ===== Animations ===== */
-@keyframes fadeInDown {
-  0% { opacity: 0; transform: translateY(-50px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(50px); }
-  100% { opacity: 1; transform: translateY(0); }
+/* Curseur personnalisé */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00ff88;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: 0.1s;
 }
