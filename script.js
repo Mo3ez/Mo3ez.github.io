@@ -1,7 +1,5 @@
 // script.js - Animations, curseur, matrix binaire, stats, terminal interactif enrichi
-console.log("✅ script.js chargé");
-console.log("terminalInput :", document.getElementById('terminal-input'));
-console.log("terminalBody :", document.getElementById('terminal-body'));
+
 document.addEventListener('DOMContentLoaded', () => {
   // ----- 1. CURSEUR PERSONNALISÉ (desktop) -----
   const cursor = document.querySelector('.cursor');
