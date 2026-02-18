@@ -225,7 +225,6 @@ Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Bu
         printLine('  date                     - Date actuelle');
         printLine('  tree                     - Arborescence');
         printLine('  help                     - Cette aide');
-        printLine('  13/06/2006               - Commande secrète');
         break;
       case 'ls':
         if (currentDir.type !== 'dir') {
