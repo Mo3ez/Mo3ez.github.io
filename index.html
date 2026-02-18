@@ -13,7 +13,7 @@
   <!-- Curseur personnalisé (visible sur desktop) -->
   <div class="cursor"></div>
 
-  <!-- Canvas pour fond Matrix animé -->
+  <!-- Canvas pour fond binaire animé (0 et 1) -->
   <canvas id="matrix"></canvas>
 
   <!-- Navigation fixe -->
@@ -46,7 +46,7 @@
       <div class="container">
         <h2 class="section-title">Profil</h2>
         <div class="profil-content">
-          <p>Étudiant passionné en cybersécurité offensive, spécialisé en tests d'intrusion et Red Team. Je combine un Home Lab actif (5 machines virtuelles) avec une pratique quotidienne sur Root-Me (350+ points) et des CTFs. Actuellement en préparation de la certification eJPT. Je recherche une alternance pour mettre mes compétences au service d'équipes offensives.</p>
+          <p>Passionné par la cybersécurité offensive, je suis actuellement à la recherche d’une alternance en cybersécurité, orientée pentest. J’ai acquis des compétences pratiques en sécurité des systèmes, réseaux, tests d’intrusion et automatisation en Python. Mon objectif est d’évoluer vers un poste en cybersécurité offensive / red team.</p>
         </div>
       </div>
     </section>
@@ -56,14 +56,14 @@
       <div class="container">
         <h2 class="section-title">Compétences</h2>
         <div class="skills-grid">
-          <div class="skill-card"><i class="fab fa-python"></i> Python</div>
-          <div class="skill-card"><i class="fas fa-code"></i> HTML/CSS/JS</div>
-          <div class="skill-card"><i class="fas fa-network-wired"></i> Réseaux</div>
+          <div class="skill-card"><i class="fas fa-shield-alt"></i> Cybersécurité</div>
+          <div class="skill-card"><i class="fab fa-python"></i> Python / Automatisation</div>
+          <div class="skill-card"><i class="fas fa-network-wired"></i> Réseaux & Admin</div>
+          <div class="skill-card"><i class="fas fa-bug"></i> Analyse vulnérabilités</div>
+          <div class="skill-card"><i class="fas fa-tasks"></i> Gestion de projets</div>
           <div class="skill-card"><i class="fab fa-linux"></i> Linux/Windows</div>
-          <div class="skill-card"><i class="fas fa-server"></i> Active Directory</div>
-          <div class="skill-card"><i class="fas fa-bug"></i> Pentesting</div>
-          <div class="skill-card"><i class="fas fa-shield-alt"></i> Analyse vulnérabilités</div>
-          <div class="skill-card"><i class="fas fa-robot"></i> Automatisation</div>
+          <div class="skill-card"><i class="fas fa-database"></i> SQL / Traitement données</div>
+          <div class="skill-card"><i class="fas fa-code"></i> HTML/CSS/JS</div>
         </div>
       </div>
     </section>
@@ -74,25 +74,20 @@
         <h2 class="section-title">Expériences</h2>
         <div class="terminal" id="interactive-terminal">
           <div class="terminal-header">
-            <span class="terminal-title">user@abdelmouez:~/exp</span>
+            <span class="terminal-title">user@abdelmouez:~$</span>
             <span class="terminal-controls">✕</span>
           </div>
           <div class="terminal-body" id="terminal-body">
-            <div class="line">$ cat experience.log</div>
-            <div class="line">[2025] Stage Iboo-Technologies</div>
-            <div class="line">  → Tests d'intrusion sur applications web</div>
-            <div class="line">  → Rédaction de rapports de vulnérabilités</div>
-            <div class="line">  → Outils d'automatisation en Python</div>
-            <div class="line">[CTF] Root-Me (350+ pts) & HackTheBox</div>
-            <div class="line">[Home Lab] 5 VMs (AD, Linux, SIEM)</div>
+            <div class="line">Bienvenue dans le terminal interactif d'Abdelmouez.</div>
+            <div class="line">Tapez 'help' pour voir les commandes disponibles.</div>
             <div class="line">$ <span class="cursor-blink">_</span></div>
           </div>
           <div class="terminal-input-line">
             <span class="prompt">$</span>
-            <input type="text" id="terminal-input" placeholder="Tapez help" autocomplete="off">
+            <input type="text" id="terminal-input" placeholder="Tapez une commande" autocomplete="off">
           </div>
         </div>
-        <p class="terminal-hint">* Tapez <strong>help</strong> dans le terminal pour plus d'infos</p>
+        <p class="terminal-hint">* Explore mon parcours avec des commandes comme <strong>ls</strong>, <strong>cd</strong>, <strong>cat</strong>.</p>
       </div>
     </section>
 
@@ -109,7 +104,7 @@
           <div class="stat-item">
             <i class="fas fa-certificate"></i>
             <span class="stat-number" data-target="1">0</span>
-            <span class="stat-label">Certification (eJPT en cours)</span>
+            <span class="stat-label">Certification (EJPT en cours)</span>
           </div>
           <div class="stat-item">
             <i class="fas fa-server"></i>
@@ -126,7 +121,9 @@
         <h2 class="section-title">Contact</h2>
         <div class="contact-info">
           <p><i class="fas fa-map-marker-alt"></i> Angers, France</p>
+          <p><i class="fas fa-phone"></i> 07.67.09.11.54</p>
           <p><i class="fas fa-envelope"></i> <a href="mailto:abdelmouezamine@gmail.com">abdelmouezamine@gmail.com</a></p>
+          <p><i class="fas fa-id-card"></i> Permis B</p>
           <p><i class="fas fa-briefcase"></i> Recherche alternance cybersécurité offensive</p>
         </div>
       </div>
