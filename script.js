@@ -110,14 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   });
 
-  // ----- 6. TERMINAL INTERACTIF -----
-  const terminalInput = document.getElementById('terminal-input');
-  const terminalBody = document.getElementById('terminal-body');
-  if (!terminalInput || !terminalBody) {
-    console.error('Terminal elements not found');
-    return;
-  }
-  terminalInput.focus();
+// ----- 6. TERMINAL INTERACTIF -----
+const terminalInput = document.getElementById('terminal-input');
+const terminalBody = document.getElementById('terminal-body');
+if (!terminalInput || !terminalBody) {
+  console.error('Terminal elements not found');
+  return;
+}
+
+// Focus initial mais on ne force pas après
+terminalInput.focus();
 
   // Structure du système de fichiers (version humaine)
   const root = {
@@ -299,33 +301,30 @@ Tape 'help' pour commencer.` },
   promptInit.innerHTML = '$ <span class="cursor-blink">_</span>';
   terminalBody.appendChild(promptInit);
 
-  // Gestion de l'entrée
-  terminalInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const input = terminalInput.value.trim();
-      if (input === '') return;
+// Gestion de l'entrée
+terminalInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const input = terminalInput.value.trim();
+    if (input === '') return;
 
-      const cmdLine = document.createElement('div');
-      cmdLine.className = 'line';
-      cmdLine.innerHTML = `<span style="color:#ff3366;">$</span> ${input}`;
-      terminalBody.appendChild(cmdLine);
+    const cmdLine = document.createElement('div');
+    cmdLine.className = 'line';
+    cmdLine.innerHTML = `<span style="color:#ff3366;">$</span> ${input}`;
+    terminalBody.appendChild(cmdLine);
 
-      processCommand(input);
+    processCommand(input);
 
-      const promptLine = document.createElement('div');
-      promptLine.className = 'line';
-      promptLine.innerHTML = '$ <span class="cursor-blink">_</span>';
-      terminalBody.appendChild(promptLine);
+    const promptLine = document.createElement('div');
+    promptLine.className = 'line';
+    promptLine.innerHTML = '$ <span class="cursor-blink">_</span>';
+    terminalBody.appendChild(promptLine);
 
-      terminalBody.scrollTop = terminalBody.scrollHeight;
-      terminalInput.value = '';
-    }
-  });
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+    terminalInput.value = '';
+  }
+});
 
-  terminalInput.addEventListener('blur', () => {
-    setTimeout(() => terminalInput.focus(), 10);
-  });
-
+  
   // ----- 7. SMOOTH SCROLL -----
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
