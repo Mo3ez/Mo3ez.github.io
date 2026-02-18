@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.style.display = 'none';
   }
 
-  // ----- 2. FOND BINAIRE (0 et 1) -----
+  // ----- 2. FOND BINAIRE -----
   const canvas = document.getElementById('matrix');
   const ctx = canvas.getContext('2d');
 
@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.2 });
-
   sections.forEach(section => observer.observe(section));
 
   // ----- 4. COMPTEUR DE STATISTIQUES -----
@@ -124,15 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ----- 6. TERMINAL INTERACTIF (CORRIGÉ) -----
   const terminalInput = document.getElementById('terminal-input');
-  const terminalBody = document.getElementById('terminal-body'); // <-- ICI, PLUS DE "document document"
+  const terminalBody = document.getElementById('terminal-body');
 
-  // Vérification que les éléments existent
   if (!terminalInput || !terminalBody) {
     console.error('Terminal elements not found!');
     return;
   }
 
-  // Focus sur l'input
   terminalInput.focus();
 
   // Structure du système de fichiers
@@ -315,10 +312,10 @@ Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Bu
     }
   }
 
-  // Message d'accueil dans le terminal
+  // Message d'accueil
   printLine('Bienvenue dans le terminal interactif d\'Abdelmouez.', '#00ff9d');
   printLine('Tapez "help" pour voir les commandes disponibles.', '#00ff9d');
-  printLine('$ _', '#00ff9d');  // invite initiale
+  printLine('$ _', '#00ff9d');
 
   // Gestion de l'entrée
   terminalInput.addEventListener('keydown', (e) => {
@@ -326,16 +323,13 @@ Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Bu
       const input = terminalInput.value.trim();
       if (input === '') return;
 
-      // Afficher la commande tapée
       const cmdLine = document.createElement('div');
       cmdLine.className = 'line';
       cmdLine.innerHTML = `<span style="color:#ff3366;">$</span> ${input}`;
       terminalBody.appendChild(cmdLine);
 
-      // Traiter la commande
       processCommand(input);
 
-      // Nouvelle invite
       const promptLine = document.createElement('div');
       promptLine.className = 'line';
       promptLine.innerHTML = '$ <span class="cursor-blink">_</span>';
@@ -346,7 +340,6 @@ Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Bu
     }
   });
 
-  // Garder le focus
   terminalInput.addEventListener('blur', () => {
     setTimeout(() => terminalInput.focus(), 10);
   });
