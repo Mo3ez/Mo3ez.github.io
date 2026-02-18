@@ -126,9 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   });
 
-// ----- 6. TERMINAL INTERACTIF AVANCÉ (CORRIGÉ) -----
+// ----- 6. TERMINAL INTERACTIF AVANCÉ (VERSION FINALE CORRIGÉE) -----
 const terminalInput = document.getElementById('terminal-input');
-const terminalBody = document document.getElementById('terminal-body');
+const terminalBody = document.getElementById('terminal-body'); // <-- correction ici
 
 // Donne le focus à l'input au chargement
 terminalInput.focus();
@@ -181,7 +181,7 @@ Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Bu
 };
 
 // Pile pour gérer le chemin courant (on commence à la racine)
-let pathStack = [root]; // contient les noeuds de répertoire
+let pathStack = [root];
 let currentDir = root;
 
 // Fonction pour afficher une ligne dans le terminal
@@ -205,10 +205,14 @@ function printHTML(html) {
 
 // Fonction pour obtenir le chemin sous forme de chaîne (pour pwd)
 function getPathString() {
+  if (pathStack.length === 1) return '/';
   let path = '';
-  for (let i = 0; i < pathStack.length; i++) {
-    if (i === 0) path = '/';
-    else path += '/' + Object.keys(pathStack[i-1].content).find(key => pathStack[i-1].content[key] === pathStack[i]);
+  for (let i = 1; i < pathStack.length; i++) {
+    // retrouver le nom du dossier à partir du parent
+    const parent = pathStack[i-1];
+    const child = pathStack[i];
+    const name = Object.keys(parent.content).find(key => parent.content[key] === child);
+    path += '/' + name;
   }
   return path;
 }
@@ -235,7 +239,7 @@ function processCommand(cmd) {
       printLine('  clear                   - Efface le terminal');
       printLine('  whoami                   - Affiche ton identité');
       printLine('  date                     - Affiche la date actuelle');
-      printLine('  tree (simulé)            - Affiche l\'arborescence simplifiée');
+      printLine('  tree                     - Affiche l\'arborescence simplifiée');
       printLine('  help                     - Affiche cette aide');
       printLine('  13/06/2006               - Commande secrète ;)');
       break;
@@ -350,12 +354,7 @@ terminalInput.addEventListener('keydown', (e) => {
     // Traiter la commande
     processCommand(input);
 
-    // Ajouter une nouvelle invite (sauf si clear a tout effacé)
-    if (command !== 'clear') { // attention : on n'a pas accès à command ici, on peut tester si la dernière ligne ajoutée est l'invite ou non. Solution simple : on laisse le clear gérer, et on ajoute l'invite après chaque commande sauf clear.
-      // On va plutôt toujours ajouter l'invite après traitement, sauf si clear a vidé le terminal.
-      // Mais clear vide le terminal, donc l'invite doit être réécrite. On va donc toujours l'ajouter.
-    }
-    // On ajoute l'invite après chaque commande (même clear, car on veut une nouvelle invite après)
+    // Ajouter une nouvelle invite (même après clear, car clear vide tout et on veut une invite)
     const promptLine = document.createElement('div');
     promptLine.className = 'line';
     promptLine.innerHTML = '$ <span class="cursor-blink">_</span>';
