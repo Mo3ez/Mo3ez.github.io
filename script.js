@@ -1,8 +1,5 @@
 // script.js - Portfolio cyber d'Abdelmouez Amine
 document.addEventListener('DOMContentLoaded', () => {
-  // Forcer le scroll en haut de page au chargement
-  window.scrollTo(0, 0);
-
   // ----- 1. CURSEUR PERSONNALISÉ -----
   const cursor = document.querySelector('.cursor');
   if (window.innerWidth > 768) {
@@ -110,48 +107,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   });
 
-// ----- 6. TERMINAL INTERACTIF -----
-const terminalInput = document.getElementById('terminal-input');
-const terminalBody = document.getElementById('terminal-body');
-if (!terminalInput || !terminalBody) {
-  console.error('Terminal elements not found');
-  return;
-}
+  // ----- 6. TERMINAL INTERACTIF -----
+  const terminalInput = document.getElementById('terminal-input');
+  const terminalBody = document.getElementById('terminal-body');
+  if (!terminalInput || !terminalBody) {
+    console.error('Terminal elements not found');
+    return;
+  }
+  // Plus de focus automatique : l'utilisateur clique pour activer
 
-// Focus initial mais on ne force pas après
-terminalInput.focus();
-
-  // Structure du système de fichiers (version humaine)
+  // Structure du système de fichiers
   const root = {
     type: 'dir',
     content: {
-      'README.md': { type: 'file', content: `# Bienvenue dans mon univers cyber
+      'README.md': { type: 'file', content: `# Abdelmouez Amine - Portfolio Cyber
 
-Je m'appelle Abdelmouez, étudiant passionné par la sécurité offensive. 
-Ce terminal retrace mon parcours, mes projets et mes objectifs.
+Bienvenue dans mon terminal interactif. Il retrace mon parcours en cybersécurité.
 
-Tape 'help' pour commencer.` },
+Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoami, tree` },
       'college': { type: 'dir', content: {
-        'snt.txt': { type: 'file', content: 'Au collège, j\'ai découvert l\'informatique avec la spécialité SNT. On faisait du Scratch, des petits jeux, et j\'ai tout de suite accroché. C\'est là que j\'ai compris que je voulais travailler dans le numérique.' }
+        'snt.txt': { type: 'file', content: 'Collège : spécialité SNT (Sciences Numériques et Technologie). Initiation à Scratch, logique algorithmique, premiers pas en programmation.' }
       } },
       'lycee': { type: 'dir', content: {
-        'specialites.md': { type: 'file', content: 'Au lycée, j\'ai pris les spécialités NSI et Maths. En NSI, on a fait du Python (POO), du SQL, du HTML/CSS, et j\'ai adoré créer des petits sites et des scripts. Les maths m\'ont appris la logique et la rigueur.' }
+        'specialites.md': { type: 'file', content: 'Lycée : spécialités NSI (Numérique et Sciences Informatiques) et Mathématiques.\n- NSI : Python avancé (POO), SQL, HTML/CSS, algorithmique.\n- Maths : raisonnement logique, probabilités, modélisation.' }
       } },
       'bts': { type: 'dir', content: {
-        'ciel_ir.txt': { type: 'file', content: 'Actuellement en BTS CIEL option IR à Chemillé-en-Anjou. On voit de tout : Python, HTML/CSS/JS, administration Linux/Windows, réseaux Cisco (VLAN, routage, SSH, VPN), bases de données SQL. Un super terrain de jeu pour un futur pentester.' }
+        'ciel_ir.txt': { type: 'file', content: `BTS CIEL option IR (Informatique et Réseaux) - Chemillé-en-Anjou (2024-2026)
+- Python procédural et orienté objet
+- HTML, CSS, JavaScript
+- Administration Linux/Windows
+- Supervision réseau, sécurité équipements Cisco (VLAN, routage, SSH, VPN)
+- Bases de données : requêtes SQL, traitement Python` }
       } },
       'autodidacte': { type: 'dir', content: {
-        'pentest.txt': { type: 'file', content: 'En parallèle, je me forme en autodidacte avec un mentor ingénieur en cybersécurité. On fait du pentesting, de la défense réseau, de l\'analyse de vulnérabilités. Je passe aussi du temps sur Root-Me (350+ points), des CTF, et j\'ai monté un Home Lab avec Kali, Metasploit, Burp, Wireshark... Bref, je vis cyber 24h/24.' }
+        'pentest.txt': { type: 'file', content: `Apprentissage autodidacte en cybersécurité (2025-)
+- Mentorat avec ingénieur cybersécurité : pentesting, défense réseau, analyse de vulnérabilités
+- Pratique Root-Me (350+ points) et CTF
+- Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Wazuh)` }
       } },
       'esiea': { type: 'dir', content: {
-        'cycle_ingenieur.txt': { type: 'file', content: "À partir de septembre 2026, je serai à l'ESIEA Paris en cycle ingénieur, spécialisation cybersécurité. L'approche projet et l'alternance me permettront de monter en compétences et de mettre le pied à l'étrier dans le monde pro." }
+        'cycle_ingenieur.txt': { type: 'file', content: 'École d\'ingénieurs ESIEA - Cycle ingénieur, 3e année (à partir de sept 2026)\nCampus de Paris - Spécialisation cybersécurité\nApproche projet et professionnalisation en alternance.' }
       } },
       'stage': { type: 'dir', content: {
-        'iboo_technologies.txt': { type: 'file', content: "Stage chez Iboo-Technologies (2025) : configuration d'environnements sécurisés (Intune, Azure), audit réseau, création d'une campagne de phishing avec Gophish, scripts PowerShell. Une première expérience concrète très enrichissante." }
+        'iboo_technologies.txt': { type: 'file', content: `Stage Technicien Informatique et Réseaux - Iboo-Technologies (Mai 2025 – Juillet 2025)
+- Configuration machines/environnements sécurisés (Intune, Azure, Windows)
+- Audit sécurité réseau/système : détection vulnérabilités, analyse trafic
+- Création campagne de phishing (Gophish)
+- Développement scripts d'automatisation (PowerShell)
+Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Burp Suite, Gobuster.` }
       } },
       'projets': { type: 'dir', content: {
-        'sites_vitrines.txt': { type: 'file', content: 'J\'ai réalisé des sites vitrines pour des associations et petits commerces. Ça m\'a permis de maîtriser HTML/CSS/JS et de comprendre les besoins clients.' },
-        'passe_ton_hack.txt': { type: 'file', content: "Participation à l'événement 'Passe ton hack d'abord' : une initiation au hacking éthique qui a confirmé ma voie." }
+        'sites_vitrines.txt': { type: 'file', content: 'Réalisation de sites vitrines pour des associations et petits commerces (HTML/CSS/JS).' },
+        'passe_ton_hack.txt': { type: 'file', content: 'Participation à l\'événement "Passe ton hack d’abord" – initiation au hacking éthique.' }
       } }
     }
   };
@@ -189,13 +196,14 @@ Tape 'help' pour commencer.` },
       case 'help':
         printLine('Commandes disponibles :', '#ff3366');
         printLine('  ls                      - Liste le contenu du dossier courant');
-        printLine('  cd <dossier>            - Change de dossier (utilise "cd .." pour revenir)');
+        printLine('  cd <dossier>            - Change de dossier (ex: cd college)');
+        printLine('  cd ..                   - Revenir au dossier parent');
         printLine('  cat <fichier>           - Affiche le contenu d\'un fichier');
         printLine('  pwd                     - Affiche le chemin courant');
         printLine('  clear                   - Efface le terminal');
         printLine('  whoami                   - Affiche ton identité');
         printLine('  date                     - Affiche la date actuelle');
-        printLine('  tree                     - Affiche l\'arborescence');
+        printLine('  tree                     - Affiche l\'arborescence simplifiée');
         printLine('  help                     - Affiche cette aide');
         break;
       case 'ls':
@@ -259,7 +267,7 @@ Tape 'help' pour commencer.` },
         printLine(getPathString());
         break;
       case 'whoami':
-        printLine('Abdelmouez Amine - Futur pentester / Red Team, en recherche d\'alternance');
+        printLine('Abdelmouez Amine - Pentester / Red Team');
         break;
       case 'date':
         printLine(new Date().toString());
@@ -279,52 +287,38 @@ Tape 'help' pour commencer.` },
         terminalBody.innerHTML = '';
         break;
       default:
-        printLine(`Commande inconnue: ${command}. Tape 'help' pour la liste.`, '#ff3366');
+        printLine(`Commande inconnue: ${command}. Tapez 'help'.`, '#ff3366');
     }
   }
 
-  // Message d'accueil (sans forcer le scroll, car la page est déjà en haut)
-  const welcome1 = document.createElement('div');
-  welcome1.className = 'line';
-  welcome1.style.color = '#00ff9d';
-  welcome1.innerText = 'Bienvenue dans le terminal interactif d\'Abdelmouez.';
-  terminalBody.appendChild(welcome1);
+  // Message d'accueil
+  printLine('Bienvenue dans le terminal interactif d\'Abdelmouez.', '#00ff9d');
+  printLine('Tapez "help" pour voir les commandes disponibles.', '#00ff9d');
+  printLine('$ _', '#00ff9d');
 
-  const welcome2 = document.createElement('div');
-  welcome2.className = 'line';
-  welcome2.style.color = '#00ff9d';
-  welcome2.innerText = 'Tape "help" pour voir les commandes disponibles.';
-  terminalBody.appendChild(welcome2);
+  // Gestion de l'entrée
+  terminalInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const input = terminalInput.value.trim();
+      if (input === '') return;
 
-  const promptInit = document.createElement('div');
-  promptInit.className = 'line';
-  promptInit.innerHTML = '$ <span class="cursor-blink">_</span>';
-  terminalBody.appendChild(promptInit);
+      const cmdLine = document.createElement('div');
+      cmdLine.className = 'line';
+      cmdLine.innerHTML = `<span style="color:#ff3366;">$</span> ${input}`;
+      terminalBody.appendChild(cmdLine);
 
-// Gestion de l'entrée
-terminalInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    const input = terminalInput.value.trim();
-    if (input === '') return;
+      processCommand(input);
 
-    const cmdLine = document.createElement('div');
-    cmdLine.className = 'line';
-    cmdLine.innerHTML = `<span style="color:#ff3366;">$</span> ${input}`;
-    terminalBody.appendChild(cmdLine);
+      const promptLine = document.createElement('div');
+      promptLine.className = 'line';
+      promptLine.innerHTML = '$ <span class="cursor-blink">_</span>';
+      terminalBody.appendChild(promptLine);
 
-    processCommand(input);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+      terminalInput.value = '';
+    }
+  });
 
-    const promptLine = document.createElement('div');
-    promptLine.className = 'line';
-    promptLine.innerHTML = '$ <span class="cursor-blink">_</span>';
-    terminalBody.appendChild(promptLine);
-
-    terminalBody.scrollTop = terminalBody.scrollHeight;
-    terminalInput.value = '';
-  }
-});
-
-  
   // ----- 7. SMOOTH SCROLL -----
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
