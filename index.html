@@ -13,14 +13,16 @@
   
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <rect width="100" height="100" fill="#0a0c0f"/>
-  <!-- Cercle extérieur (lentille) -->
-  <circle cx="50" cy="50" r="35" stroke="#00ff9d" stroke-width="2" fill="none"/>
-  <!-- A en forme de pupille -->
-  <text x="50" y="65" font-family="'Share Tech Mono', monospace" font-size="50" fill="#00ff9d" text-anchor="middle" dominant-baseline="middle">A</text>
-  <!-- Iris rouge -->
-  <circle cx="50" cy="50" r="15" fill="#ff3366" opacity="0.5"/>
-  <!-- Point lumineux -->
-  <circle cx="40" cy="40" r="3" fill="#ffffff"/>
+  <!-- Masque (contour) -->
+  <path d="M30 40 Q50 20, 70 40 L70 70 Q50 90, 30 70 Z" fill="none" stroke="#00ff9d" stroke-width="3"/>
+  <!-- Barre du A -->
+  <line x1="50" y1="20" x2="50" y2="70" stroke="#00ff9d" stroke-width="4"/>
+  <!-- Yeux -->
+  <circle cx="40" cy="50" r="5" fill="#ff3366"/>
+  <circle cx="60" cy="50" r="5" fill="#ff3366"/>
+  <!-- Circuits -->
+  <path d="M10 80 L30 80 L30 60 L50 60" stroke="#ff3366" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+  <path d="M90 20 L70 20 L70 40 L50 40" stroke="#ff3366" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
 </svg>
 
 
