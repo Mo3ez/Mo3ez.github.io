@@ -147,6 +147,107 @@ h1 {
   text-shadow: 0 0 10px var(--accent-red);
 }
 
+
+/* Logo cyber */
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.cyber-logo {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--accent-red);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--accent-red);
+}
+
+.a-letter {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--accent-red);
+  text-shadow: 0 0 15px var(--accent-red);
+  font-family: var(--font-mono);
+  transform: scale(1.2);
+  z-index: 2;
+}
+
+.circuit {
+  position: absolute;
+  background: var(--accent-green);
+  opacity: 0.7;
+  box-shadow: 0 0 8px var(--accent-green);
+}
+
+.circuit.top {
+  width: 30px;
+  height: 2px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: pulse 2s infinite;
+}
+
+.circuit.bottom {
+  width: 30px;
+  height: 2px;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: pulse 2s infinite 0.5s;
+}
+
+.circuit.left {
+  width: 2px;
+  height: 30px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulse 2s infinite 1s;
+}
+
+.circuit.right {
+  width: 2px;
+  height: 30px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: pulse 2s infinite 1.5s;
+}
+
+.glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,51,102,0.2) 0%, transparent 70%);
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* Responsive : si l'écran est petit, on empile */
+@media (max-width: 600px) {
+  .header-logo {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
 /* Effet Glitch */
 .glitch {
   position: relative;
