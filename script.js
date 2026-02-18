@@ -1,5 +1,8 @@
-// script.js - Portfolio cyber d'Abdelmouez Amine (version finale)
+// script.js - Portfolio cyber d'Abdelmouez Amine
 document.addEventListener('DOMContentLoaded', () => {
+  // Forcer le scroll en haut de page au chargement
+  window.scrollTo(0, 0);
+
   // ----- 1. CURSEUR PERSONNALISÉ -----
   const cursor = document.querySelector('.cursor');
   if (window.innerWidth > 768) {
@@ -116,46 +119,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   terminalInput.focus();
 
-  // Structure du système de fichiers (simplifiée, tu pourras modifier les textes plus tard)
+  // Structure du système de fichiers (version humaine)
   const root = {
     type: 'dir',
     content: {
-      'README.md': { type: 'file', content: `# Abdelmouez Amine - Portfolio Cyber
+      'README.md': { type: 'file', content: `# Bienvenue dans mon univers cyber
 
-Bienvenue dans mon terminal interactif. Explore mon parcours avec les commandes ci-dessous.
+Je m'appelle Abdelmouez, étudiant passionné par la sécurité offensive. 
+Ce terminal retrace mon parcours, mes projets et mes objectifs.
 
-Commandes de base :
-- ls : lister le contenu du dossier courant
-- cd <dossier> : changer de dossier
-- cat <fichier> : afficher le contenu d'un fichier
-- pwd : chemin courant
-- clear : effacer le terminal
-- whoami : afficher mon identité
-- date : date actuelle
-- tree : arborescence simplifiée
-
-Pour remonter d'un dossier, utilise "cd ..".` },
+Tape 'help' pour commencer.` },
       'college': { type: 'dir', content: {
-        'snt.txt': { type: 'file', content: 'Au collège, j\'ai découvert l\'informatique avec la spécialité SNT. J\'ai appris les bases de la programmation avec Scratch et la logique algorithmique. Ça a éveillé ma curiosité pour le numérique.' }
+        'snt.txt': { type: 'file', content: 'Au collège, j\'ai découvert l\'informatique avec la spécialité SNT. On faisait du Scratch, des petits jeux, et j\'ai tout de suite accroché. C\'est là que j\'ai compris que je voulais travailler dans le numérique.' }
       } },
       'lycee': { type: 'dir', content: {
-        'specialites.md': { type: 'file', content: 'Au lycée, j\'ai choisi les spécialités NSI et Mathématiques. En NSI, j\'ai approfondi Python (POO), SQL, HTML/CSS et les algorithmes. Les maths m\'ont apporté une rigueur logique essentielle.' }
+        'specialites.md': { type: 'file', content: 'Au lycée, j\'ai pris les spécialités NSI et Maths. En NSI, on a fait du Python (POO), du SQL, du HTML/CSS, et j\'ai adoré créer des petits sites et des scripts. Les maths m\'ont appris la logique et la rigueur.' }
       } },
       'bts': { type: 'dir', content: {
-        'ciel_ir.txt': { type: 'file', content: 'Mon BTS CIEL option IR à Chemillé-en-Anjou m\'a formé aux réseaux et à la cybersécurité. J\'y ai appris l\'administration Linux/Windows, la configuration Cisco, la supervision, et le développement Python.' }
+        'ciel_ir.txt': { type: 'file', content: 'Actuellement en BTS CIEL option IR à Chemillé-en-Anjou. On voit de tout : Python, HTML/CSS/JS, administration Linux/Windows, réseaux Cisco (VLAN, routage, SSH, VPN), bases de données SQL. Un super terrain de jeu pour un futur pentester.' }
       } },
       'autodidacte': { type: 'dir', content: {
-        'pentest.txt': { type: 'file', content: 'En parallèle, je me forme en autodidacte avec un mentor ingénieur en cybersécurité. Je pratique sur Root-Me (350+ pts), participe à des CTF et monte un Home Lab avec Kali, Metasploit, Burp Suite, etc.' }
+        'pentest.txt': { type: 'file', content: 'En parallèle, je me forme en autodidacte avec un mentor ingénieur en cybersécurité. On fait du pentesting, de la défense réseau, de l\'analyse de vulnérabilités. Je passe aussi du temps sur Root-Me (350+ points), des CTF, et j\'ai monté un Home Lab avec Kali, Metasploit, Burp, Wireshark... Bref, je vis cyber 24h/24.' }
       } },
       'esiea': { type: 'dir', content: {
-        'cycle_ingenieur.txt': { type: 'file', content: 'À partir de septembre 2026, j\'intégrerai l\'ESIEA à Paris pour un cycle ingénieur spécialisé en cybersécurité. Une formation par alternance qui me permettra de devenir pentester.' }
+        'cycle_ingenieur.txt': { type: 'file', content: "À partir de septembre 2026, je serai à l'ESIEA Paris en cycle ingénieur, spécialisation cybersécurité. L'approche projet et l'alternance me permettront de monter en compétences et de mettre le pied à l'étrier dans le monde pro." }
       } },
       'stage': { type: 'dir', content: {
-        'iboo_technologies.txt': { type: 'file', content: 'Stage chez Iboo-Technologies (2025) : configuration d\'environnements sécurisés (Intune, Azure), audit réseau, création de campagne de phishing, scripts PowerShell. Une expérience concrète en entreprise.' }
+        'iboo_technologies.txt': { type: 'file', content: "Stage chez Iboo-Technologies (2025) : configuration d'environnements sécurisés (Intune, Azure), audit réseau, création d'une campagne de phishing avec Gophish, scripts PowerShell. Une première expérience concrète très enrichissante." }
       } },
       'projets': { type: 'dir', content: {
-        'sites_vitrines.txt': { type: 'file', content: 'J\'ai réalisé des sites vitrines pour des associations et petits commerces en HTML/CSS/JS. Ça m\'a permis de comprendre les besoins clients et de livrer des projets concrets.' },
-        'passe_ton_hack.txt': { type: 'file', content: 'Participation à l\'événement "Passe ton hack d’abord" : initiation au hacking éthique, premiers pas en cybersécurité offensive.' }
+        'sites_vitrines.txt': { type: 'file', content: 'J\'ai réalisé des sites vitrines pour des associations et petits commerces. Ça m\'a permis de maîtriser HTML/CSS/JS et de comprendre les besoins clients.' },
+        'passe_ton_hack.txt': { type: 'file', content: "Participation à l'événement 'Passe ton hack d'abord' : une initiation au hacking éthique qui a confirmé ma voie." }
       } }
     }
   };
@@ -193,19 +187,18 @@ Pour remonter d'un dossier, utilise "cd ..".` },
       case 'help':
         printLine('Commandes disponibles :', '#ff3366');
         printLine('  ls                      - Liste le contenu du dossier courant');
-        printLine('  cd <dossier>            - Change de dossier (ex: cd college)');
+        printLine('  cd <dossier>            - Change de dossier (utilise "cd .." pour revenir)');
         printLine('  cat <fichier>           - Affiche le contenu d\'un fichier');
         printLine('  pwd                     - Affiche le chemin courant');
         printLine('  clear                   - Efface le terminal');
         printLine('  whoami                   - Affiche ton identité');
         printLine('  date                     - Affiche la date actuelle');
-        printLine('  tree                     - Affiche l\'arborescence simplifiée');
+        printLine('  tree                     - Affiche l\'arborescence');
         printLine('  help                     - Affiche cette aide');
-        printLine('  Pour remonter : cd ..    - Retour au dossier parent');
         break;
       case 'ls':
         if (currentDir.type !== 'dir') {
-          printLine('Erreur : ce n\'est pas un dossier.', '#ff3366');
+          printLine('Erreur : pas un dossier.', '#ff3366');
         } else {
           const items = Object.keys(currentDir.content || {}).sort();
           if (items.length === 0) {
@@ -236,7 +229,7 @@ Pour remonter d'un dossier, utilise "cd ..".` },
         } else {
           const target = args[0];
           if (currentDir.type !== 'dir') {
-            printLine('Erreur : ce n\'est pas un dossier.', '#ff3366');
+            printLine('Erreur : pas un dossier.', '#ff3366');
           } else if (currentDir.content[target] && currentDir.content[target].type === 'dir') {
             currentDir = currentDir.content[target];
             pathStack.push(currentDir);
@@ -248,11 +241,11 @@ Pour remonter d'un dossier, utilise "cd ..".` },
         break;
       case 'cat':
         if (args.length === 0) {
-          printLine('cat : argument manquant. Utilisation : cat <fichier>', '#ff3366');
+          printLine('cat : manque fichier.', '#ff3366');
         } else {
           const filename = args[0];
           if (currentDir.type !== 'dir') {
-            printLine('Erreur : impossible de lire dans un fichier.', '#ff3366');
+            printLine('Erreur : pas un dossier.', '#ff3366');
           } else if (currentDir.content[filename] && currentDir.content[filename].type === 'file') {
             printLine(currentDir.content[filename].content);
           } else {
@@ -264,13 +257,12 @@ Pour remonter d'un dossier, utilise "cd ..".` },
         printLine(getPathString());
         break;
       case 'whoami':
-        printLine('Abdelmouez Amine - Étudiant en cybersécurité, futur pentester Red Team');
+        printLine('Abdelmouez Amine - Futur pentester / Red Team, en recherche d\'alternance');
         break;
       case 'date':
         printLine(new Date().toString());
         break;
       case 'tree':
-        printLine('Arborescence simplifiée :');
         printLine('/');
         printLine('  ├── college/');
         printLine('  ├── lycee/');
@@ -285,14 +277,27 @@ Pour remonter d'un dossier, utilise "cd ..".` },
         terminalBody.innerHTML = '';
         break;
       default:
-        printLine(`Commande inconnue : ${command}. Tapez 'help' pour la liste.`, '#ff3366');
+        printLine(`Commande inconnue: ${command}. Tape 'help' pour la liste.`, '#ff3366');
     }
   }
 
-  // Message d'accueil
-  printLine('Bienvenue dans le terminal interactif d\'Abdelmouez.', '#00ff9d');
-  printLine('Tapez "help" pour voir les commandes disponibles.', '#00ff9d');
-  printLine('$ _', '#00ff9d');
+  // Message d'accueil (sans forcer le scroll, car la page est déjà en haut)
+  const welcome1 = document.createElement('div');
+  welcome1.className = 'line';
+  welcome1.style.color = '#00ff9d';
+  welcome1.innerText = 'Bienvenue dans le terminal interactif d\'Abdelmouez.';
+  terminalBody.appendChild(welcome1);
+
+  const welcome2 = document.createElement('div');
+  welcome2.className = 'line';
+  welcome2.style.color = '#00ff9d';
+  welcome2.innerText = 'Tape "help" pour voir les commandes disponibles.';
+  terminalBody.appendChild(welcome2);
+
+  const promptInit = document.createElement('div');
+  promptInit.className = 'line';
+  promptInit.innerHTML = '$ <span class="cursor-blink">_</span>';
+  terminalBody.appendChild(promptInit);
 
   // Gestion de l'entrée
   terminalInput.addEventListener('keydown', (e) => {
@@ -332,9 +337,4 @@ Pour remonter d'un dossier, utilise "cd ..".` },
       }
     });
   });
-
-  // S'assurer que la page est en haut au chargement (si jamais il y a un fragment dans l'URL)
-  if (window.location.hash) {
-    window.scrollTo(0, 0);
-  }
 });
