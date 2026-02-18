@@ -132,18 +132,24 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
         'specialites.md': { type: 'file', content: 'Lycée : spécialités NSI (Numérique et Sciences Informatiques) et Mathématiques.\n- NSI : Python avancé (POO), SQL, HTML/CSS, algorithmique.\n- Maths : raisonnement logique, probabilités, modélisation.' }
       } },
       'bts': { type: 'dir', content: {
-        'ciel_ir.txt': { type: 'file', content: `BTS CIEL option IR (Informatique et Réseaux) - Chemillé-en-Anjou (2024-2026)
+  'ciel_ir.txt': { type: 'file', content: `BTS CIEL option IR (Informatique et Réseaux) - Chemillé-en-Anjou (2024-2026)
 - Python procédural et orienté objet
 - HTML, CSS, JavaScript
 - Administration Linux/Windows
 - Supervision réseau, sécurité équipements Cisco (VLAN, routage, SSH, VPN)
-- Bases de données : requêtes SQL, traitement Python` }
-      } },
+- Bases de données : requêtes SQL, traitement Python` },
+  'projet_BTS.txt': { type: 'file', content: `Projets réalisés en BTS CIEL :
+- Création d'un serveur web sécurisé (Python Flask)
+- Développement d'une reconnaissance de couleur sur colonne lumineuse avec intelligence artificielle (YOLO)
+- Transmission et sécurisation des flux vidéo (RTSP)
+- Communication avec une base de données distante (MySQL, API REST, VPN)
+- Sécurisation des échanges et analyse des logs` }
+} },
       'autodidacte': { type: 'dir', content: {
-        'pentest.txt': { type: 'file', content: `Apprentissage autodidacte en cybersécurité (2025-)
-- Mentorat avec ingénieur cybersécurité : pentesting, défense réseau, analyse de vulnérabilités
+        'pentest.txt': { type: 'file', content: `Apprentissage autodidacte en cybersécurité
+- Mentorat avec un ingénieur en cybersécurité : pentesting, défense réseau, analyse de vulnérabilités
 - Pratique Root-Me (350+ points) et CTF
-- Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Wazuh)` }
+- Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Debian)` }
       } },
       'esiea': { type: 'dir', content: {
         'cycle_ingenieur.txt': { type: 'file', content: 'École d\'ingénieurs ESIEA - Cycle ingénieur, 3e année (à partir de sept 2026)\nCampus de Paris - Spécialisation cybersécurité\nApproche projet et professionnalisation en alternance.' }
@@ -153,11 +159,11 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
 - Configuration machines/environnements sécurisés (Intune, Azure, Windows)
 - Audit sécurité réseau/système : détection vulnérabilités, analyse trafic
 - Création campagne de phishing (Gophish)
-- Développement scripts d'automatisation (PowerShell)
-Environnement : Microsoft Intune, Azure, Windows Server, AD, Wireshark, Nmap, Burp Suite, Gobuster.` }
+- Développement scripts d'automatisation (Bash)
+Environnement : Microsoft Intune, Azure, Windows Server, Kali, Debian, AD, Wireshark, Nmap, Burp Suite, Gobuster.` }
       } },
       'projets': { type: 'dir', content: {
-        'sites_vitrines.txt': { type: 'file', content: 'Réalisation de sites vitrines pour des associations et petits commerces (HTML/CSS/JS).' },
+        'sites_vitrines.txt': { type: 'file', content: 'Réalisation de sites vitrines pour des associations et petits commerces (HTML/CSS/JS, WordPress).' },
         'passe_ton_hack.txt': { type: 'file', content: 'Participation à l\'événement "Passe ton hack d’abord" – initiation au hacking éthique.' }
       } }
     }
