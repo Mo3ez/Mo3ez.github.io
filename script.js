@@ -138,12 +138,14 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
 - Administration Linux/Windows
 - Supervision réseau, sécurité équipements Cisco (VLAN, routage, SSH, VPN)
 - Bases de données : requêtes SQL, traitement Python` },
-  'projet_BTS.txt': { type: 'file', content: `Projets réalisés en BTS CIEL :
-- Création d'un serveur web sécurisé (Python Flask)
-- Développement d'une reconnaissance de couleur sur colonne lumineuse avec intelligence artificielle (YOLO)
-- Transmission et sécurisation des flux vidéo (RTSP)
-- Communication avec une base de données distante (MySQL, API REST, VPN)
-- Sécurisation des échanges et analyse des logs` }
+  'projet_BTS.txt': { type: 'file', content: `Projet BTS : Système de supervision industrielle par vision IA
+- Développement d'une reconnaissance de couleur sur colonne lumineuse avec YOLO
+- Transmission et sécurisation des flux vidéo (RTSP, VPN)
+- Interface web de supervision (Flask)
+- Communication avec base de données distante (MySQL, API REST)
+- Sécurisation des échanges et analyse des logs
+
+Pour plus de détails, explore : /projets/supervision_ia/README.md` }
 } },
       'autodidacte': { type: 'dir', content: {
         'pentest.txt': { type: 'file', content: `Apprentissage autodidacte en cybersécurité
@@ -163,9 +165,89 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
 Environnement : Microsoft Intune, Azure, Windows Server, Kali, Debian, AD, Wireshark, Nmap, Burp Suite, Gobuster.` }
       } },
       'projets': { type: 'dir', content: {
-        'sites_vitrines.txt': { type: 'file', content: 'Réalisation de sites vitrines pour des associations et petits commerces (HTML/CSS/JS, WordPress).' },
-        'passe_ton_hack.txt': { type: 'file', content: 'Participation à l\'événement "Passe ton hack d’abord" – initiation au hacking éthique.' }
-      } }
+  'pentest_android': { type: 'dir', content: {
+    'README.md': { type: 'file', content: `# Projet 1 – Pentest Android
+**Simulation d'attaque mobile en environnement de test**
+
+## Contexte
+Dans le cadre de mon apprentissage en cybersécurité offensive, j'ai mis en place un lab personnel afin de comprendre les techniques utilisées lors des attaques visant les appareils Android. L'objectif était d'étudier le fonctionnement des payloads mobiles, les vecteurs d'infection via applications malveillantes, ainsi que les méthodes de détection et de protection.
+
+## Objectifs
+- Comprendre le fonctionnement d'un accès distant sur Android
+- Étudier les risques liés aux applications modifiées (APK trojanisées)
+- Manipuler des outils de pentest mobile
+- Analyser les mécanismes de sécurité Android
+
+## Méthodologie
+1. **Mise en place de l'environnement** : Lab Linux, téléphone Android de test, réseau isolé.
+2. **Génération d'un payload** : Création d'un payload Android, intégration dans une APK de test.
+3. **Exploitation contrôlée** : Accès aux fichiers, informations système, capteurs.
+4. **Analyse sécurité** : Permissions Android, risques sources inconnues, solutions de protection.
+
+## Compétences développées
+- Pentest mobile (bases)
+- Compréhension architecture Android
+- Manipulation de payloads
+- Analyse des risques applicatifs
+
+## Environnement technique
+Kali Linux, Metasploit, Android, APKTool, VirtualBox, réseaux TCP/IP.` }
+  } },
+  'supervision_ia': { type: 'dir', content: {
+    'README.md': { type: 'file', content: `# Projet 2 – Système de supervision industrielle par vision IA
+**Projet scolaire**
+
+## Contexte
+Développement d'une solution supervisant des machines industrielles via analyse automatisée d'un flux vidéo. Détection des états machines par couleurs de colonne lumineuse, affichage sur interface web.
+
+## Objectifs
+- Capturer et traiter un flux vidéo en temps réel
+- Détecter automatiquement les états machines via IA (YOLO)
+- Stocker les données en base SQL
+- Interface web de supervision
+- Sécuriser l'architecture
+
+## Architecture
+Caméra → Traitement IA → Base de données → Serveur web → Interface utilisateur
+
+## Partie traitement vidéo & IA
+- Récupération flux vidéo (caméra réseau)
+- Traitement Python/OpenCV
+- Modèle YOLO pour détection couleurs :
+  - Vert : fonctionnement normal
+  - Orange : alerte
+  - Rouge : erreur machine
+
+## Backend & serveur
+- Serveur Flask avec API REST
+- Connexion base SQL pour stockage événements et statistiques
+
+## Interface web
+Dashboard temps réel avec :
+- Flux vidéo direct
+- États machines
+- Statistiques journalières/mensuelles
+- Graphiques d'activité
+- Gestion des caméras
+
+## Sécurisation
+- VPN pour communications
+- HTTPS
+- Protection injections SQL, XSS
+- Sécurisation serveur Linux
+- Authentification
+
+## Compétences développées
+- Vision par ordinateur
+- Architecture web
+- Sécurité applicative
+- Traitement flux temps réel
+- Python avancé
+
+## Environnement technique
+Python, Flask, YOLO, OpenCV, SQL, Linux, HTML/CSS/JavaScript, VPN.` }
+  } }
+} },
     }
   };
 
