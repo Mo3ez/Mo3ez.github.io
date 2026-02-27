@@ -8,22 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-family='Share Tech Mono, monospace' font-size='80' fill='%23ff3366' text-anchor='middle' font-weight='bold' filter='url(%23glow)'%3EA%3C/text%3E%3Cdefs%3E%3Cfilter id='glow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur in='SourceAlpha' stdDeviation='4' result='blur' /%3E%3CfeMerge%3E%3CfeMergeNode in='blur' /%3E%3CfeMergeNode in='SourceGraphic' /%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E">
 
+  <!-- Favicon (A néon rouge) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='70' font-family='Share Tech Mono, monospace' font-size='80' fill='%23ff3366' text-anchor='middle' font-weight='bold' filter='url(%23glow)'%3EA%3C/text%3E%3Cdefs%3E%3Cfilter id='glow' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeGaussianBlur in='SourceAlpha' stdDeviation='4' result='blur' /%3E%3CfeMerge%3E%3CfeMergeNode in='blur' /%3E%3CfeMergeNode in='SourceGraphic' /%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E">
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L56LT4RHW1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L56LT4RHW1');
-</script>
-
-
-  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L56LT4RHW1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L56LT4RHW1');
+  </script>
 </head>
 <body>
   <!-- Curseur personnalisé -->
@@ -38,6 +34,7 @@
       <li><a href="#header" class="nav-link">Accueil</a></li>
       <li><a href="#profil" class="nav-link">Profil</a></li>
       <li><a href="#competences" class="nav-link">Compétences</a></li>
+      <li><a href="#projets" class="nav-link">Projets</a></li>
       <li><a href="#experiences" class="nav-link">Expériences</a></li>
       <li><a href="#statistiques" class="nav-link">Stats</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -45,26 +42,22 @@
   </nav>
 
   <main>
+    <!-- Header -->
+    <section id="header" class="section header-section">
+      <div class="container">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+          <!-- QR code (100x100) avec tracking -->
+          <img src="assets/qr-email.png" alt="QR code" onclick="gtag('event', 'scan_qr', {'event_category': 'engagement', 'event_label': 'QR vers email'});" style="width: 100px; height: 100px;">
+          <h1 class="glitch" data-text="ABDELMOUEZ AMINE">ABDELMOUEZ AMINE</h1>
+        </div>
+        <p class="subtitle">Cybersecurity • Pentester • Red Team</p>
+        <a href="assets/cv.pdf" download class="btn btn-cv" id="download-cv">
+          <i class="fas fa-download"></i> Télécharger CV
+        </a>
+        <p style="margin-top: 1rem; color: var(--accent-green); font-family: var(--font-mono);">Recherche alternance cybersécurité offensive (Red Team) pour septembre 2026</p>
+      </div>
+    </section>
 
-    
-
-<!-- Header -->
-<section id="header" class="section header-section">
-  <div class="container">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
-      <!-- QR code seul, sans texte -->
-<img src="assets/qr-email.png" alt="QR code" onclick="gtag('event', 'scan_qr', {'event_category': 'engagement', 'event_label': 'QR vers email'});" style="width: 150px; height: 150px;">
-      <h1 class="glitch" data-text="ABDELMOUEZ AMINE">ABDELMOUEZ AMINE</h1>
-    </div>
-    <p class="subtitle">Cybersecurity • Pentester • Red Team</p>
-    <a href="assets/cv.pdf" download class="btn btn-cv" id="download-cv">
-      <i class="fas fa-download"></i> Télécharger CV
-    </a>
-    <p style="margin-top: 1rem; color: var(--accent-green); font-family: var(--font-mono);">Recherche alternance cybersécurité offensive (Red Team) pour septembre 2026</p>
-  </div>
-</section>
-    
-    
     <!-- Profil -->
     <section id="profil" class="section">
       <div class="container">
@@ -95,6 +88,31 @@
           <div class="skill-card"><i class="fas fa-search"></i> Nmap</div>
           <div class="skill-card"><i class="fas fa-eye"></i> Wireshark</div>
           <div class="skill-card"><i class="fas fa-hammer"></i> Gobuster</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projets techniques -->
+    <section id="projets" class="section">
+      <div class="container">
+        <h2 class="section-title">Projets techniques</h2>
+        <div class="projets-grid">
+          <div class="projet-card">
+            <h3><i class="fas fa-mobile-alt"></i> Pentest Android</h3>
+            <p><strong>Objectif :</strong> Création d'une APK malveillante intégrant un payload Metasploit pour prise de contrôle à distance d'un appareil Android de test.</p>
+            <p><strong>Réalisation :</strong> Génération du payload avec msfvenom, intégration dans une APK légitime, ouverture d'une session Meterpreter avec accès à la caméra, au microphone et aux fichiers. Rédaction d'un rapport d'analyse des risques.</p>
+            <p><strong>Environnement :</strong> Kali Linux, Metasploit, msfvenom, APKTool, Android SDK, VirtualBox.</p>
+          </div>
+          <div class="projet-card">
+            <h3><i class="fas fa-industry"></i> Supervision Industrielle (en cours)</h3>
+            <p><strong>Contexte :</strong> Projet pour une entreprise industrielle : supervision de machines via analyse vidéo IA.</p>
+            <p><strong>Réalisation :</strong> Récupération du flux vidéo (caméra), analyse en temps réel des couleurs de colonne lumineuse (vert/orange/rouge) avec YOLO, stockage des données en base SQL. Développement d'un serveur Flask avec API, interface web sécurisée (HTTPS, VPN, protection injections SQL/XSS). Visualisation des données (graphiques, historique, flux en direct) et gestion des caméras/machines.</p>
+            <p><strong>Environnement :</strong> Python, Flask, YOLO, OpenCV, SQL, Linux, HTML/CSS/JS, VPN.</p>
+          </div>
+          <div class="projet-card">
+            <h3><i class="fas fa-globe"></i> Projets Web</h3>
+            <p>Création de sites vitrines pour associations et petits commerces (HTML/CSS/JS, WordPress).</p>
+          </div>
         </div>
       </div>
     </section>
@@ -164,6 +182,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
