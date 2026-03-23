@@ -150,7 +150,7 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
       'autodidacte': { type: 'dir', content: {
         'pentest.txt': { type: 'file', content: `Apprentissage autodidacte en cybersécurité
 - Mentorat avec un ingénieur en cybersécurité : pentesting, défense réseau, analyse de vulnérabilités
-- Pratique Root-Me (350+ points) et CTF
+- Pratique Root-Me (400+ points) et CTF
 - Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Debian)` }
       } },
       'esiea': { type: 'dir', content: {
