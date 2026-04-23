@@ -32,6 +32,7 @@
       align-items: center;
       justify-content: center;
       transition: opacity 0.8s ease;
+      cursor: default;
     }
     #recon-overlay.fade-out {
       opacity: 0;
@@ -46,37 +47,42 @@
     }
     #recon-terminal {
       font-family: 'Share Tech Mono', monospace;
-      font-size: clamp(0.75rem, 2vw, 1rem);
+      font-size: clamp(0.8rem, 2vw, 1.05rem);
       color: #00ff9d;
-      max-width: 640px;
+      max-width: 660px;
       width: 90%;
-      line-height: 2;
+      line-height: 2.1;
       position: relative;
       z-index: 1;
     }
     .recon-line {
       opacity: 0;
-      animation: fadeInLine 0.15s ease forwards;
-      min-height: 1.5em;
+      animation: fadeInLine 0.2s ease forwards;
+      min-height: 1.6em;
     }
     @keyframes fadeInLine {
-      from { opacity: 0; transform: translateX(-6px); }
+      from { opacity: 0; transform: translateX(-8px); }
       to   { opacity: 1; transform: translateX(0); }
     }
     #recon-skip {
       position: absolute;
       bottom: 2rem; right: 2rem;
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.75rem;
-      color: #3a4a4a;
+      font-size: 0.85rem;
+      color: #00ff9d;
       cursor: pointer;
-      transition: color 0.2s;
+      transition: all 0.2s;
       z-index: 2;
-      background: none;
-      border: none;
-      padding: 0;
+      background: transparent;
+      border: 1px solid #00ff9d44;
+      padding: 0.5rem 1.2rem;
+      letter-spacing: 1px;
     }
-    #recon-skip:hover { color: #ff3366; }
+    #recon-skip:hover {
+      color: #ff3366;
+      border-color: #ff3366;
+      box-shadow: 0 0 12px rgba(255,51,102,0.3);
+    }
   </style>
 </head>
 <body>
@@ -274,7 +280,7 @@
     const skipBtn  = document.getElementById('recon-skip');
     const bgCanvas = document.getElementById('recon-bg');
 
-    // Mini matrix background
+    // ── Mini matrix background ──
     const ctx = bgCanvas.getContext('2d');
     bgCanvas.width  = window.innerWidth;
     bgCanvas.height = window.innerHeight;
@@ -295,20 +301,20 @@
     }
     drawBg();
 
-    // Fetch IP (max 2s timeout)
+    // ── Fetch IP + geo via ipwho.is (plus fiable) ──
     let ipData = {};
     try {
       const controller = new AbortController();
-      const t = setTimeout(() => controller.abort(), 2000);
-      const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+      const t = setTimeout(() => controller.abort(), 3000);
+      const res = await fetch('https://ipwho.is/', { signal: controller.signal });
       clearTimeout(t);
       ipData = await res.json();
     } catch(e) {}
 
-    // Parse user agent
+    // ── Parse user agent ──
     const ua = navigator.userAgent;
     let os = 'Unknown';
-    if (/Windows NT 1[01]/.test(ua))   os = 'Windows 10/11';
+    if (/Windows NT 1[01]/.test(ua))   os = 'Windows 10 / 11';
     else if (/Windows/.test(ua))       os = 'Windows';
     else if (/Android/.test(ua))       os = 'Android';
     else if (/iPhone|iPad/.test(ua))   os = 'iOS';
@@ -322,28 +328,37 @@
     else if (/Firefox\//.test(ua))     browser = 'Firefox';
     else if (/Safari\//.test(ua))      browser = 'Safari';
 
-    const parts     = (ipData.ip || '').split('.');
-    const maskedIp  = parts.length === 4 ? `${parts[0]}.${parts[1]}.xxx.xxx` : '?.?.xxx.xxx';
-    const location  = [ipData.city, ipData.country_name].filter(Boolean).join(', ') || 'Unknown';
-    const tz        = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-    const lang      = (navigator.language || 'Unknown').toUpperCase();
-    const screenRes = `${window.screen.width}x${window.screen.height}`;
+    // ── Mask : garder 3 octets visibles ──
+    const parts    = (ipData.ip || '').split('.');
+    const maskedIp = parts.length === 4
+      ? `${parts[0]}.${parts[1]}.${parts[2]}.xxx`
+      : '?.?.?.xxx';
+
+    const city     = ipData.city     || '';
+    const region   = ipData.region   || '';
+    const country  = ipData.country  || '';
+    const isp      = ipData.connection?.isp || ipData.org || '';
+    const location = [city, region, country].filter(Boolean).join(', ') || 'Unknown';
+    const tz       = ipData.timezone?.id || Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+    const lang     = (navigator.language || 'Unknown').toUpperCase();
+    const res      = `${window.screen.width}x${window.screen.height}`;
 
     const lines = [
-      { text: '[INITIATING RECON SEQUENCE...]',         color: '#ff3366', delay: 0 },
-      { text: '',                                        color: '',        delay: 350 },
-      { text: '> SCANNING TARGET...',                   color: '#ffaa00', delay: 600 },
-      { text: `> IP ADDRESS      :  ${maskedIp}`,       color: '#00ff9d', delay: 1050 },
-      { text: `> LOCATION        :  ${location}`,       color: '#00ff9d', delay: 1380 },
-      { text: `> OS DETECTED     :  ${os}`,             color: '#00ff9d', delay: 1700 },
-      { text: `> BROWSER         :  ${browser}`,        color: '#00ff9d', delay: 1980 },
-      { text: `> RESOLUTION      :  ${screenRes}`,      color: '#00ff9d', delay: 2240 },
-      { text: `> LANGUAGE        :  ${lang}`,           color: '#00ff9d', delay: 2480 },
-      { text: `> TIMEZONE        :  ${tz}`,             color: '#00ff9d', delay: 2720 },
-      { text: '',                                        color: '',        delay: 2980 },
-      { text: '[RECON COMPLETE — NO THREATS DETECTED]', color: '#ff3366', delay: 3180 },
-      { text: '',                                        color: '',        delay: 3420 },
-      { text: '[ACCESS GRANTED — loading portfolio...]', color: '#00ff9d', delay: 3620 },
+      { text: '[INITIATING RECON SEQUENCE...]',         color: '#ff3366', delay: 0    },
+      { text: '',                                        color: '',        delay: 500  },
+      { text: '> SCANNING TARGET...',                   color: '#ffaa00', delay: 900  },
+      { text: `> IP ADDRESS      :  ${maskedIp}`,       color: '#00ff9d', delay: 1600 },
+      { text: `> LOCATION        :  ${location}`,       color: '#00ff9d', delay: 2200 },
+      { text: `> ISP             :  ${isp || 'N/A'}`,   color: '#00ff9d', delay: 2750 },
+      { text: `> OS DETECTED     :  ${os}`,             color: '#00ff9d', delay: 3250 },
+      { text: `> BROWSER         :  ${browser}`,        color: '#00ff9d', delay: 3700 },
+      { text: `> RESOLUTION      :  ${res}`,            color: '#00ff9d', delay: 4100 },
+      { text: `> LANGUAGE        :  ${lang}`,           color: '#00ff9d', delay: 4450 },
+      { text: `> TIMEZONE        :  ${tz}`,             color: '#00ff9d', delay: 4800 },
+      { text: '',                                        color: '',        delay: 5150 },
+      { text: '[RECON COMPLETE — NO THREATS DETECTED]', color: '#ff3366', delay: 5450 },
+      { text: '',                                        color: '',        delay: 5800 },
+      { text: '[ACCESS GRANTED — loading portfolio...]', color: '#00ff9d', delay: 6100 },
     ];
 
     const timers = [];
@@ -364,7 +379,7 @@
       setTimeout(() => { overlay.style.display = 'none'; }, 800);
     }
 
-    const autoTimer = setTimeout(dismiss, 4600);
+    const autoTimer = setTimeout(dismiss, 8000);
     skipBtn.addEventListener('click', () => { clearTimeout(autoTimer); dismiss(); });
   })();
   </script>
