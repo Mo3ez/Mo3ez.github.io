@@ -279,6 +279,7 @@ Python, Flask, YOLO, OpenCV, SQL (MySQL/PostgreSQL), Linux, HTML/CSS/JS, VPN (Wi
         printLine('  whoami                   - Affiche ton identité');
         printLine('  date                     - Affiche la date actuelle');
         printLine('  tree                     - Affiche l\'arborescence simplifiée');
+        printLine('  scan                     - Effectue un scan OSINT sur la cible actuelle');
         printLine('  help                     - Affiche cette aide');
         break;
       case 'ls':
@@ -366,6 +367,108 @@ Python, Flask, YOLO, OpenCV, SQL (MySQL/PostgreSQL), Linux, HTML/CSS/JS, VPN (Wi
         printLine('  │   └── supervision_ia/');
         printLine('  │       └── README.md');
         printLine('  └── README.md');
+        break;
+      case 'scan':
+        (async function() {
+          printLine('[RUNNING RECON ON CURRENT TARGET...]', '#ff3366');
+          printLine('', '#00ff9d');
+
+          // GPU
+          let gpu = null;
+          try {
+            const c = document.createElement('canvas');
+            const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+            if (gl) {
+              const ext = gl.getExtension('WEBGL_debug_renderer_info');
+              if (ext) gpu = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL).replace(/\/.*$/, '').trim();
+            }
+          } catch(e) {}
+
+          // OS / Browser
+          const ua = navigator.userAgent;
+          const os = /Windows NT 1[01]/.test(ua) ? 'Windows 10/11' : /Windows/.test(ua) ? 'Windows' : /Android/.test(ua) ? 'Android' : /iPhone|iPad/.test(ua) ? 'iOS' : /Mac OS X/.test(ua) ? 'macOS' : /Linux/.test(ua) ? 'Linux' : 'Unknown';
+          const browser = /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera' : /Chrome\//.test(ua) ? 'Chrome' : /Firefox\//.test(ua) ? 'Firefox' : /Safari\//.test(ua) ? 'Safari' : 'Unknown';
+
+          // Device
+          let device = null;
+          const sm = ua.match(/;\s*(SM-[A-Z0-9]+)/);
+          const iph = ua.match(/iPhone OS ([\d_]+)/);
+          const am = ua.match(/Android[\s/][\d.]+;\s*([^)]+)\)/);
+          if (sm) device = 'Samsung ' + sm[1];
+          else if (iph) device = 'iPhone (iOS ' + iph[1].replace(/_/g, '.') + ')';
+          else if (/iPad/.test(ua)) device = 'iPad';
+          else if (am && !/Android/.test(am[1])) device = am[1].trim();
+
+          // Connection
+          const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+          let connection = null;
+          if (conn) {
+            const m = { wifi:'Wi-Fi', ethernet:'Ethernet', cellular:'Cellular', '4g':'4G LTE', '3g':'3G', '2g':'2G' };
+            const raw = (conn.type && conn.type !== 'unknown') ? conn.type : conn.effectiveType;
+            connection = m[raw] || raw || null;
+          }
+
+          // Battery
+          let battery = null;
+          try {
+            if (navigator.getBattery) {
+              const b = await navigator.getBattery();
+              battery = Math.round(b.level * 100) + '%' + (b.charging ? ' ⚡' : '');
+            }
+          } catch(e) {}
+
+          // Geo
+          let ip = null, location = null, isp = null;
+          try {
+            const r1 = await fetch('https://api.ipify.org?format=json');
+            const j1 = await r1.json();
+            if (j1.ip) {
+              const p = j1.ip.split('.');
+              ip = p.length === 4 ? p[0]+'.'+p[1]+'.'+p[2]+'.xxx' : j1.ip;
+              const r2 = await fetch('https://ipwho.is/' + j1.ip);
+              const j2 = await r2.json();
+              const loc = [j2.city, j2.region, j2.country].filter(Boolean).join(', ');
+              if (loc) location = loc;
+              isp = (j2.connection && j2.connection.isp) || j2.org || null;
+            }
+          } catch(e) {}
+
+          // Hardware
+          const cores = navigator.hardwareConcurrency || null;
+          const ram   = navigator.deviceMemory ? navigator.deviceMemory + ' GB' : null;
+          const dpr   = window.devicePixelRatio || 1;
+          const display = window.screen.width + 'x' + window.screen.height + (dpr >= 2 ? ' (Retina ' + dpr + 'x)' : '');
+
+          // Print results
+          const row = (label, value) => {
+            if (!value) return;
+            const pad = '               '.slice(label.length);
+            printLine('  ' + label + pad + value, '#00ff9d');
+          };
+
+          printLine('  ── NETWORK ─────────────────────────', '#ff3366');
+          row('IP', ip);
+          row('Location', location);
+          row('ISP', isp);
+          row('Connection', connection);
+          printLine('', '#00ff9d');
+          printLine('  ── SYSTEM ──────────────────────────', '#ff3366');
+          row('OS', os);
+          row('Browser', browser);
+          if (device) row('Device', device);
+          printLine('', '#00ff9d');
+          printLine('  ── HARDWARE ────────────────────────', '#ff3366');
+          if (cores)   row('CPU Cores', String(cores));
+          if (ram)     row('RAM', ram);
+          if (gpu)     row('GPU', gpu);
+          row('Display', display);
+          if (battery) row('Battery', battery);
+          printLine('', '#00ff9d');
+
+          let count = 0;
+          [ip, location, isp, connection, os, browser, device, cores, ram, gpu, battery].forEach(v => { if (v) count++; });
+          printLine('[' + count + ' data points collected — target identified]', '#ff3366');
+        })();
         break;
       case 'clear':
         terminalBody.innerHTML = '';
