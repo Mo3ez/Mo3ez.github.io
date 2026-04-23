@@ -35,6 +35,7 @@
       <li><a href="#profil" class="nav-link">Profil</a></li>
       <li><a href="#competences" class="nav-link">Compétences</a></li>
       <li><a href="#experiences" class="nav-link">Expériences</a></li>
+      <li><a href="#projets" class="nav-link">Projets</a></li>
       <li><a href="#statistiques" class="nav-link">Stats</a></li>
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
@@ -62,7 +63,7 @@
       <div class="container">
         <h2 class="section-title">Profil</h2>
         <div class="profil-content">
-          <p>Étudiant en BTS CIEL option IR et futur ingénieur en cybersécurité (ESIEA), je suis passionné par l'offensif et plus particulièrement par le pentesting et les activités Red Team. Curieux et déterminé, j'ai développé en autodidacte un Home Lab pour mettre en pratique mes connaissances sur des environnements contrôlés (Kali Linux, Active Directory, Metasploit...). Je participe régulièrement à des CTF et je consolide mes compétences sur Root-Me (400+ points).</p>
+          <p>Étudiant en BTS CIEL option IR et futur ingénieur en cybersécurité (ESIEA), je suis passionné par l'offensif et plus particulièrement par le pentesting et les activités Red Team. Curieux et déterminé, j'ai développé en autodidacte un Home Lab pour mettre en pratique mes connaissances sur des environnements contrôlés (Kali Linux, Active Directory, Metasploit...). Je participe régulièrement à des CTF et je consolide mes compétences sur Root-Me (575+ points).</p>
           <p>Dans le cadre de ma poursuite d'études en école d'ingénieurs, je recherche une alternance en cybersécurité pour la rentrée 2026. Je souhaite intégrer une équipe dynamique où je pourrai contribuer à des missions de tests d'intrusion et monter en compétence aux côtés de professionnels expérimentés. Rigoureux, autonome et avec un bon esprit d'équipe, je suis prêt à relever de nouveaux défis !</p>
         </div>
       </div>
@@ -91,10 +92,27 @@
       </div>
     </section>
 
-    <!-- Expériences (terminal interactif) -->
+    <!-- Expériences (stage card + terminal interactif) -->
     <section id="experiences" class="section">
       <div class="container">
         <h2 class="section-title">Expériences</h2>
+
+        <!-- Stage Iboo-Technologies (visible sans terminal) -->
+        <div style="background: rgba(20,24,28,0.8); border: 1px solid var(--accent-red); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2rem; backdrop-filter: blur(4px); box-shadow: 0 0 30px rgba(255,51,102,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+            <h3 style="color: var(--accent-red); font-family: var(--font-mono); font-size: 1rem; letter-spacing: 1px;">Stage — Technicien Informatique &amp; Réseaux · Iboo-Technologies</h3>
+            <span style="color: #aaa; font-family: var(--font-mono); font-size: 0.85rem; white-space: nowrap;">Mai 2025 – Juil. 2025</span>
+          </div>
+          <ul style="list-style: none; padding: 0; color: #ccc; font-size: 0.95rem; line-height: 2;">
+            <li><span style="color: var(--accent-red);">▸</span> Audit sécurité réseau/système : détection de vulnérabilités, analyse de trafic</li>
+            <li><span style="color: var(--accent-red);">▸</span> Création d'une campagne de phishing interne avec Gophish</li>
+            <li><span style="color: var(--accent-red);">▸</span> Configuration d'environnements sécurisés (Azure, Intune, Windows Server)</li>
+            <li><span style="color: var(--accent-red);">▸</span> Développement de scripts d'automatisation Python</li>
+          </ul>
+          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-green); font-family: var(--font-mono);">Intune · Azure · Windows Server · Active Directory · Kali · Wireshark · Nmap · Burp Suite · Gophish</p>
+        </div>
+
+        <!-- Terminal interactif -->
         <div class="terminal" id="interactive-terminal">
           <div class="terminal-header">
             <span class="terminal-title">user@abdelmouez:~$</span>
@@ -112,6 +130,37 @@
       </div>
     </section>
 
+    <!-- Projets -->
+    <section id="projets" class="section">
+      <div class="container">
+        <h2 class="section-title">Projets</h2>
+        <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+          <div class="skill-card" style="text-align: left; padding: 1.8rem;">
+            <i class="fas fa-mobile-alt" style="display: block; text-align: center;"></i>
+            <h3 style="color: var(--accent-red); font-family: var(--font-mono); font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 0.8rem;">Pentest Android</h3>
+            <p style="font-size: 0.9rem; line-height: 1.7; color: #ccc;">Payload Metasploit intégré dans une APK malveillante. Session Meterpreter avec accès caméra, micro et fichiers. Rédaction d'un rapport d'analyse des risques.</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-green); font-family: var(--font-mono);">Kali · Metasploit · msfvenom · APKTool</p>
+          </div>
+
+          <div class="skill-card" style="text-align: left; padding: 1.8rem;">
+            <i class="fas fa-industry" style="display: block; text-align: center;"></i>
+            <h3 style="color: var(--accent-red); font-family: var(--font-mono); font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 0.8rem;">Supervision Industrielle IA</h3>
+            <p style="font-size: 0.9rem; line-height: 1.7; color: #ccc;">Analyse vidéo par IA (YOLO) sur colonnes lumineuses industrielles. Dashboard Flask temps réel, base SQL, sécurisation VPN/HTTPS. Chef de projet de facto.</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-green); font-family: var(--font-mono);">Python · Flask · YOLO · OpenCV · MySQL · WireGuard</p>
+          </div>
+
+          <div class="skill-card" style="text-align: left; padding: 1.8rem;">
+            <i class="fas fa-futbol" style="display: block; text-align: center;"></i>
+            <h3 style="color: var(--accent-red); font-family: var(--font-mono); font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 0.8rem;">App Web — Club Futsal</h3>
+            <p style="font-size: 0.9rem; line-height: 1.7; color: #ccc;">Application Flask complète pour un club de futsal : back office admin, gestion des rôles, scores en direct via WebSockets, conformité RGPD.</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--accent-green); font-family: var(--font-mono);">Flask · SQLite · SocketIO · Jinja2 · MySQL</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- Statistiques animées -->
     <section id="statistiques" class="section">
       <div class="container">
@@ -119,7 +168,7 @@
         <div class="stats-container">
           <div class="stat-item">
             <i class="fas fa-flag"></i>
-            <span class="stat-number" data-target="400">0</span>
+            <span class="stat-number" data-target="575">0</span>
             <span class="stat-label">Root-Me points</span>
           </div>
           <div class="stat-item">
@@ -156,6 +205,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
