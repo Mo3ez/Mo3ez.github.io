@@ -274,7 +274,7 @@
 
   <!-- RECON SEQUENCE -->
   <script>
-  (async function runRecon() {
+  (function runRecon() {
     const overlay  = document.getElementById('recon-overlay');
     const terminal = document.getElementById('recon-terminal');
     const skipBtn  = document.getElementById('recon-skip');
@@ -301,17 +301,20 @@
     }
     drawBg();
 
-    // ── Fetch IP + geo via ipwho.is (plus fiable) ──
-    let ipData = {};
-    try {
-      const controller = new AbortController();
-      const t = setTimeout(() => controller.abort(), 3000);
-      const res = await fetch('https://ipwho.is/', { signal: controller.signal });
-      clearTimeout(t);
-      ipData = await res.json();
-    } catch(e) {}
+    // ── Fetch en parallèle (pas de await — animation démarre immédiatement) ──
+    let geo = {};
+    fetch('https://api.ipify.org?format=json')
+      .then(r => r.json())
+      .then(d => {
+        if (!d.ip) return;
+        geo.ip = d.ip;
+        return fetch('https://ipwho.is/' + d.ip);
+      })
+      .then(r => r && r.json())
+      .then(d => { if (d && d.success !== false) Object.assign(geo, d); })
+      .catch(() => {});
 
-    // ── Parse user agent ──
+    // ── Données navigateur (100% fiables, pas de fetch) ──
     const ua = navigator.userAgent;
     let os = 'Unknown';
     if (/Windows NT 1[01]/.test(ua))   os = 'Windows 10 / 11';
@@ -328,46 +331,48 @@
     else if (/Firefox\//.test(ua))     browser = 'Firefox';
     else if (/Safari\//.test(ua))      browser = 'Safari';
 
-    // ── Mask : garder 3 octets visibles ──
-    const parts    = (ipData.ip || '').split('.');
-    const maskedIp = parts.length === 4
-      ? `${parts[0]}.${parts[1]}.${parts[2]}.xxx`
-      : '?.?.?.xxx';
+    const lang     = (navigator.language || '').toUpperCase();
+    const screenRes = window.screen.width + 'x' + window.screen.height;
+    const tz        = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
 
-    const city     = ipData.city     || '';
-    const region   = ipData.region   || '';
-    const country  = ipData.country  || '';
-    const isp      = ipData.connection?.isp || ipData.org || '';
-    const location = [city, region, country].filter(Boolean).join(', ') || 'Unknown';
-    const tz       = ipData.timezone?.id || Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
-    const lang     = (navigator.language || 'Unknown').toUpperCase();
-    const res      = `${window.screen.width}x${window.screen.height}`;
+    // ── Chaque ligne lit `geo` AU MOMENT où elle s'affiche ──
+    function getIp() {
+      const parts = (geo.ip || '').split('.');
+      return parts.length === 4 ? parts[0]+'.'+parts[1]+'.'+parts[2]+'.xxx' : 'SCANNING...';
+    }
+    function getLoc() {
+      const c = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
+      return c || 'Unknown';
+    }
+    function getIsp() {
+      return (geo.connection && geo.connection.isp) || geo.org || 'Unknown';
+    }
 
-    const lines = [
-      { text: '[INITIATING RECON SEQUENCE...]',         color: '#ff3366', delay: 0    },
-      { text: '',                                        color: '',        delay: 500  },
-      { text: '> SCANNING TARGET...',                   color: '#ffaa00', delay: 900  },
-      { text: `> IP ADDRESS      :  ${maskedIp}`,       color: '#00ff9d', delay: 1600 },
-      { text: `> LOCATION        :  ${location}`,       color: '#00ff9d', delay: 2200 },
-      { text: `> ISP             :  ${isp || 'N/A'}`,   color: '#00ff9d', delay: 2750 },
-      { text: `> OS DETECTED     :  ${os}`,             color: '#00ff9d', delay: 3250 },
-      { text: `> BROWSER         :  ${browser}`,        color: '#00ff9d', delay: 3700 },
-      { text: `> RESOLUTION      :  ${res}`,            color: '#00ff9d', delay: 4100 },
-      { text: `> LANGUAGE        :  ${lang}`,           color: '#00ff9d', delay: 4450 },
-      { text: `> TIMEZONE        :  ${tz}`,             color: '#00ff9d', delay: 4800 },
-      { text: '',                                        color: '',        delay: 5150 },
-      { text: '[RECON COMPLETE — NO THREATS DETECTED]', color: '#ff3366', delay: 5450 },
-      { text: '',                                        color: '',        delay: 5800 },
-      { text: '[ACCESS GRANTED — loading portfolio...]', color: '#00ff9d', delay: 6100 },
+    const schedule = [
+      { fn: () => '[INITIATING RECON SEQUENCE...]',          color: '#ff3366', delay: 0    },
+      { fn: () => '',                                         color: '',        delay: 500  },
+      { fn: () => '> SCANNING TARGET...',                    color: '#ffaa00', delay: 900  },
+      { fn: () => '> IP ADDRESS      :  ' + getIp(),         color: '#00ff9d', delay: 1700 },
+      { fn: () => '> LOCATION        :  ' + getLoc(),        color: '#00ff9d', delay: 2300 },
+      { fn: () => '> ISP             :  ' + getIsp(),        color: '#00ff9d', delay: 2850 },
+      { fn: () => '> OS DETECTED     :  ' + os,              color: '#00ff9d', delay: 3350 },
+      { fn: () => '> BROWSER         :  ' + browser,         color: '#00ff9d', delay: 3800 },
+      { fn: () => '> RESOLUTION      :  ' + screenRes,       color: '#00ff9d', delay: 4200 },
+      { fn: () => '> LANGUAGE        :  ' + lang,            color: '#00ff9d', delay: 4550 },
+      { fn: () => '> TIMEZONE        :  ' + tz,              color: '#00ff9d', delay: 4900 },
+      { fn: () => '',                                         color: '',        delay: 5250 },
+      { fn: () => '[RECON COMPLETE — NO THREATS DETECTED]',  color: '#ff3366', delay: 5550 },
+      { fn: () => '',                                         color: '',        delay: 5900 },
+      { fn: () => '[ACCESS GRANTED — loading portfolio...]', color: '#00ff9d', delay: 6200 },
     ];
 
     const timers = [];
-    lines.forEach(({ text, color, delay }) => {
+    schedule.forEach(({ fn, color, delay }) => {
       const t = setTimeout(() => {
         const div = document.createElement('div');
-        div.className = 'recon-line';
+        div.className   = 'recon-line';
         div.style.color = color || '#00ff9d';
-        div.textContent = text;
+        div.textContent = fn();
         terminal.appendChild(div);
       }, delay);
       timers.push(t);
@@ -379,7 +384,7 @@
       setTimeout(() => { overlay.style.display = 'none'; }, 800);
     }
 
-    const autoTimer = setTimeout(dismiss, 8000);
+    const autoTimer = setTimeout(dismiss, 8200);
     skipBtn.addEventListener('click', () => { clearTimeout(autoTimer); dismiss(); });
   })();
   </script>
