@@ -389,8 +389,12 @@
     const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
     let connection = 'Unknown';
     if (conn) {
-      const typeMap = { '4g': '4G LTE', '3g': '3G', '2g': '2G', 'slow-2g': '2G (slow)', 'wifi': 'Wi-Fi', 'ethernet': 'Ethernet' };
-      connection = typeMap[conn.effectiveType] || typeMap[conn.type] || conn.effectiveType || conn.type || 'Unknown';
+      const typeMap = { '4g': '4G LTE', '3g': '3G', '2g': '2G', 'slow-2g': '2G (slow)', 'wifi': 'Wi-Fi', 'ethernet': 'Ethernet', 'cellular': 'Cellular' };
+      if (conn.type && conn.type !== 'unknown') {
+        connection = typeMap[conn.type] || conn.type;
+      } else {
+        connection = typeMap[conn.effectiveType] || conn.effectiveType || 'Unknown';
+      }
     }
 
     // Referrer
@@ -431,35 +435,38 @@
       return geo.isp || 'Unknown';
     }
 
-    const schedule = [
-      { fn: () => '[INITIATING RECON SEQUENCE...]',          color: '#ff3366', delay: 0    },
-      { fn: () => '',                                         color: '',        delay: 500  },
-      { fn: () => '> SCANNING TARGET...',                    color: '#ffaa00', delay: 900  },
-      { fn: () => '> IP ADDRESS      :  ' + getIp(),         color: '#00ff9d', delay: 1700 },
-      { fn: () => '> LOCATION        :  ' + getLoc(),        color: '#00ff9d', delay: 2250 },
-      { fn: () => '> ISP             :  ' + getIsp(),        color: '#00ff9d', delay: 2750 },
-      { fn: () => '> DEVICE          :  ' + device,          color: '#00ff9d', delay: 3200 },
-      { fn: () => '> OS DETECTED     :  ' + os,              color: '#00ff9d', delay: 3650 },
-      { fn: () => '> BROWSER         :  ' + browser,         color: '#00ff9d', delay: 4050 },
-      { fn: () => '> CONNECTION      :  ' + connection,      color: '#00ff9d', delay: 4400 },
-      { fn: () => '> BATTERY         :  ' + (battery !== null ? battery : 'N/A'), color: '#00ff9d', delay: 4750 },
-      { fn: () => '> RESOLUTION      :  ' + screenRes,       color: '#00ff9d', delay: 5050 },
-      { fn: () => '> LANGUAGE        :  ' + lang,            color: '#00ff9d', delay: 5350 },
-      { fn: () => '> TIMEZONE        :  ' + tz,              color: '#00ff9d', delay: 5650 },
-      { fn: () => '> SOURCE          :  ' + source,          color: '#00ff9d', delay: 5950 },
-      { fn: () => '',                                         color: '',        delay: 6300 },
-      { fn: () => '[RECON COMPLETE — NO THREATS DETECTED]',  color: '#ff3366', delay: 6600 },
-      { fn: () => '',                                         color: '',        delay: 6950 },
-      { fn: () => '[ACCESS GRANTED — loading portfolio...]', color: '#00ff9d', delay: 7250 },
+    const allLines = [
+      { fn: () => '[INITIATING RECON SEQUENCE...]',                              color: '#ff3366', delay: 0    },
+      { fn: () => '',                                                             color: '',        delay: 500  },
+      { fn: () => '> SCANNING TARGET...',                                        color: '#ffaa00', delay: 900  },
+      { fn: () => '> IP ADDRESS      :  ' + getIp(),                             color: '#00ff9d', delay: 1700 },
+      { fn: () => '> LOCATION        :  ' + getLoc(),                            color: '#00ff9d', delay: 2250 },
+      { fn: () => getIsp() !== 'Unknown' ? '> ISP             :  ' + getIsp() : null, color: '#00ff9d', delay: 2750 },
+      { fn: () => device !== 'Desktop / Unknown' ? '> DEVICE          :  ' + device : null, color: '#00ff9d', delay: 3200 },
+      { fn: () => '> OS DETECTED     :  ' + os,                                  color: '#00ff9d', delay: 3650 },
+      { fn: () => '> BROWSER         :  ' + browser,                             color: '#00ff9d', delay: 4050 },
+      { fn: () => connection !== 'Unknown' ? '> CONNECTION      :  ' + connection : null, color: '#00ff9d', delay: 4400 },
+      { fn: () => battery !== null ? '> BATTERY         :  ' + battery : null,  color: '#00ff9d', delay: 4750 },
+      { fn: () => '> RESOLUTION      :  ' + screenRes,                           color: '#00ff9d', delay: 5050 },
+      { fn: () => '> LANGUAGE        :  ' + lang,                                color: '#00ff9d', delay: 5350 },
+      { fn: () => '> TIMEZONE        :  ' + tz,                                  color: '#00ff9d', delay: 5650 },
+      { fn: () => source !== 'Direct' ? '> SOURCE          :  ' + source : null, color: '#00ff9d', delay: 5950 },
+      { fn: () => '',                                                             color: '',        delay: 6300 },
+      { fn: () => '[RECON COMPLETE — NO THREATS DETECTED]',                      color: '#ff3366', delay: 6600 },
+      { fn: () => '',                                                             color: '',        delay: 6950 },
+      { fn: () => '[ACCESS GRANTED — loading portfolio...]',                     color: '#00ff9d', delay: 7250 },
     ];
+    const schedule = allLines;
 
     const timers = [];
     schedule.forEach(({ fn, color, delay }) => {
       const t = setTimeout(() => {
+        const text = fn();
+        if (text === null) return;
         const div = document.createElement('div');
         div.className   = 'recon-line';
         div.style.color = color || '#00ff9d';
-        div.textContent = fn();
+        div.textContent = text;
         terminal.appendChild(div);
       }, delay);
       timers.push(t);
@@ -471,7 +478,7 @@
       setTimeout(() => { overlay.style.display = 'none'; }, 800);
     }
 
-    const autoTimer = setTimeout(dismiss, 10000);
+    const autoTimer = setTimeout(dismiss, 9500);
     skipBtn.addEventListener('click', () => { clearTimeout(autoTimer); dismiss(); });
   })();
   </script>
