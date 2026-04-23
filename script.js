@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
           stat.innerText = Math.floor(current);
           requestAnimationFrame(updateCounter);
         } else {
-          stat.innerText = target + (target === 350 ? '+' : '');
+          stat.innerText = target + (target === 575 ? '+' : '');
         }
       };
       updateCounter();
@@ -150,18 +150,19 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
       'autodidacte': { type: 'dir', content: {
         'pentest.txt': { type: 'file', content: `Apprentissage autodidacte en cybersécurité
 - Mentorat avec un ingénieur en cybersécurité : pentesting, défense réseau, analyse de vulnérabilités
-- Pratique Root-Me (400+ points) et CTF
+- Pratique Root-Me (575+ points) — Web offensif : SQLi, XSS, PHP injection, JWT bypass
+- Participation à des CTF
 - Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Debian)` }
       } },
       'esiea': { type: 'dir', content: {
-        'cycle_ingenieur.txt': { type: 'file', content: 'École d\'ingénieurs ESIEA - Cycle ingénieur, 3e année (à partir de sept 2026)\nCampus de Paris - Spécialisation cybersécurité\nApproche projet et professionnalisation en alternance.' }
+        'cycle_ingenieur.txt': { type: 'file', content: 'École d\'ingénieurs ESIEA - Cycle ingénieur, 3e année (à partir de sept 2026)\nCampus d\'Ivry-sur-Seine - Spécialisation cybersécurité\nApproche projet et professionnalisation en alternance.' }
       } },
       'stage': { type: 'dir', content: {
         'iboo_technologies.txt': { type: 'file', content: `Stage Technicien Informatique et Réseaux - Iboo-Technologies (Mai 2025 – Juillet 2025)
 - Configuration machines/environnements sécurisés (Intune, Azure, Windows)
 - Audit sécurité réseau/système : détection vulnérabilités, analyse trafic
 - Création campagne de phishing (Gophish)
-- Développement scripts d'automatisation (Bash)
+- Développement scripts d'automatisation (Python/Bash)
 Environnement : Microsoft Intune, Azure, Windows Server, Kali, Debian, AD, Wireshark, Nmap, Burp Suite, Gobuster.` }
       } },
       'projets': { type: 'dir', content: {
@@ -231,7 +232,7 @@ Caméra IP → Serveur de traitement (IA) → Base de données → Serveur web �
 - Gestion de projet technique
 
 ## Environnement technique
-Python, Flask, YOLO, OpenCV, SQL (MySQL/PostgreSQL), Linux, HTML/CSS/JavaScript, VPN (WireGuard/OpenVPN).` }
+Python, Flask, YOLO, OpenCV, SQL (MySQL/PostgreSQL), Linux, HTML/CSS/JS, VPN (WireGuard/OpenVPN).` }
         } }
       } }
     }
