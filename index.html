@@ -303,16 +303,58 @@
 
     // ── Fetch en parallèle (pas de await — animation démarre immédiatement) ──
     let geo = {};
-    fetch('https://api.ipify.org?format=json')
-      .then(r => r.json())
-      .then(d => {
-        if (!d.ip) return;
-        geo.ip = d.ip;
-        return fetch('https://ipwho.is/' + d.ip);
-      })
-      .then(r => r && r.json())
-      .then(d => { if (d && d.success !== false) Object.assign(geo, d); })
-      .catch(() => {});
+
+    // Mapping timezone → pays si les APIs échouent
+    const tzCountry = {
+      'Europe/Paris': 'France', 'Europe/London': 'United Kingdom',
+      'Europe/Berlin': 'Germany', 'Europe/Madrid': 'Spain',
+      'Europe/Rome': 'Italy', 'Europe/Brussels': 'Belgium',
+      'Europe/Amsterdam': 'Netherlands', 'Europe/Zurich': 'Switzerland',
+      'America/New_York': 'United States', 'America/Los_Angeles': 'United States',
+      'America/Chicago': 'United States', 'America/Montreal': 'Canada',
+      'Asia/Tokyo': 'Japan', 'Asia/Shanghai': 'China',
+    };
+
+    (async () => {
+      try {
+        // Étape 1 : récupère l'IP brute (ultra fiable)
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipJson = await ipRes.json();
+        if (!ipJson.ip) return;
+        geo.ip = ipJson.ip;
+
+        // Étape 2 : géolocalisation — essaie deux APIs en séquence
+        const geoApis = [
+          {
+            url: 'https://ipwho.is/' + ipJson.ip,
+            parse: d => ({
+              city:    d.city    || '',
+              region:  d.region  || '',
+              country: d.country || '',
+              isp:     (d.connection && d.connection.isp) || d.org || '',
+            })
+          },
+          {
+            url: 'https://ipapi.co/' + ipJson.ip + '/json/',
+            parse: d => ({
+              city:    d.city         || '',
+              region:  d.region       || '',
+              country: d.country_name || '',
+              isp:     d.org          || '',
+            })
+          },
+        ];
+
+        for (const api of geoApis) {
+          try {
+            const r = await fetch(api.url);
+            const d = await r.json();
+            const parsed = api.parse(d);
+            if (parsed.country) { Object.assign(geo, parsed); break; }
+          } catch(e) {}
+        }
+      } catch(e) {}
+    })();
 
     // ── Données navigateur (100% fiables, pas de fetch) ──
     const ua = navigator.userAgent;
@@ -342,10 +384,13 @@
     }
     function getLoc() {
       const c = [geo.city, geo.region, geo.country].filter(Boolean).join(', ');
-      return c || 'Unknown';
+      if (c) return c;
+      // Fallback timezone → pays
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return tzCountry[tz] || 'Unknown';
     }
     function getIsp() {
-      return (geo.connection && geo.connection.isp) || geo.org || 'Unknown';
+      return geo.isp || 'Unknown';
     }
 
     const schedule = [
