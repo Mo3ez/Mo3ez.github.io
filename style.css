@@ -617,3 +617,41 @@ footer {
     padding: 1rem;
   }
 }
+
+
+/* Liens sociaux (hero + footer) */
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.2rem 0 0.5rem;
+  flex-wrap: wrap;
+}
+.social-row a {
+  color: var(--accent-green);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.2s;
+}
+.social-row a:hover {
+  color: var(--accent-red);
+  transform: translateY(-2px);
+}
+footer .social-row a { font-size: 1rem; }
+footer .social-row { margin: 0 0 1rem; }
+
+/* Lien projet (GitHub) */
+.project-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--accent-red);
+  border-radius: 4px;
+  color: var(--accent-red);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.project-link:hover { background: var(--accent-red); color: var(--bg-dark); }
