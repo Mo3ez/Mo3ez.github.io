@@ -138,12 +138,12 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
 - Administration Linux/Windows
 - Supervision réseau, sécurité équipements Cisco (VLAN, routage, SSH, VPN)
 - Bases de données : requêtes SQL, traitement Python` },
-        'projet_BTS.txt': { type: 'file', content: `Projet BTS : Système de supervision industrielle par vision IA
-- Développement d'une reconnaissance de couleur sur colonne lumineuse avec YOLO
-- Transmission et sécurisation des flux vidéo (RTSP, VPN)
-- Interface web de supervision (Flask)
-- Communication avec base de données distante (MySQL, API REST)
-- Sécurisation des échanges et analyse des logs
+        'projet_BTS.txt': { type: 'file', content: `Projet BTS : SAM – supervision de machines-outils par vision IA (session 2026, équipe de 3)
+- Détection de la colonne lumineuse et de sa couleur avec YOLOv8
+- Flux caméras RTSP via FFmpeg, association machine/colonne par marqueurs ArUco
+- Interface web de supervision (Flask) avec rôles et alertes
+- Base MySQL, déploiement Docker Compose, HTTPS (Nginx)
+- Sécurité applicative : scrypt, SQL paramétré, CSP, tests pytest
 
 👉 Pour plus de détails, explore : /projets/supervision_ia/README.md` }
       } },
@@ -152,16 +152,17 @@ Commandes utiles : help, ls, cd <dossier>, cat <fichier>, pwd, clear, date, whoa
 - Mentorat avec un ingénieur en cybersécurité : pentesting, défense réseau, analyse de vulnérabilités
 - Pratique Root-Me (575+ points) — Web offensif : SQLi, XSS, PHP injection, JWT bypass
 - Participation à des CTF
-- Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Debian)` }
+- Home Lab (2 environnements) : attaque (Kali, Metasploit) et défense (Active Directory, Debian)
+- Active Directory : Kerberoasting, Pass-the-Hash` }
       } },
       'esiea': { type: 'dir', content: {
-        'cycle_ingenieur.txt': { type: 'file', content: 'École d\'ingénieurs ESIEA - Cycle ingénieur, 3e année (à partir de sept 2026)\nCampus d\'Ivry-sur-Seine - Spécialisation cybersécurité\nApproche projet et professionnalisation en alternance.' }
+        'cycle_ingenieur.txt': { type: 'file', content: 'École d\'ingénieurs ESIEA - Cycle ingénieur Cybersécurité (campus d\'Ivry-sur-Seine)\nAnnée en cours à l\'école ; alternance visée à partir de septembre 2027 (rythme 2 sem. école / 2 sem. entreprise).' }
       } },
       'stage': { type: 'dir', content: {
         'iboo_technologies.txt': { type: 'file', content: `Stage Technicien Informatique et Réseaux - Iboo-Technologies (Mai 2025 – Juillet 2025)
 - Configuration machines/environnements sécurisés (Intune, Azure, Windows)
 - Audit sécurité réseau/système : détection vulnérabilités, analyse trafic
-- Création campagne de phishing (Gophish)
+- Campagne de phishing complète (Gophish) : faux mail + fausse page de connexion, proposée par moi et validée par la direction
 - Développement scripts d'automatisation (Python/Bash)
 Environnement : Microsoft Intune, Azure, Windows Server, Kali, Debian, AD, Wireshark, Nmap, Burp Suite, Gobuster.` }
       } },
@@ -197,42 +198,36 @@ Dans le cadre de mon apprentissage en cybersécurité offensive, j'ai réalisé 
 Kali Linux, Metasploit, msfvenom, APKTool, Android SDK, VirtualBox.` }
         } },
         'supervision_ia': { type: 'dir', content: {
-          'README.md': { type: 'file', content: `# Projet 2 – Système de supervision industrielle par vision IA
-**Projet en cours pour une entreprise**
+          'README.md': { type: 'file', content: `# Projet 2 – SAM : supervision de machines-outils par IA
+**Projet BTS CIEL IR (session 2026) – équipe de 3 – commanditaire : Jogam Composants**
+Code : github.com/Mo3ez/Machines_Outils_2026
 
-## Contexte
-Développement d'une solution de supervision de machines industrielles via analyse vidéo automatisée. Le système doit détecter les états des machines (vert = normal, orange = alerte, rouge = erreur) à partir des couleurs d'une colonne lumineuse, et afficher les données sur une interface web sécurisée.
+## Principe
+Des caméras filment les colonnes lumineuses des machines. Un modèle YOLOv8 localise la colonne, la couleur allumée est identifiée, puis l'état est horodaté en base et affiché sur une interface web temps réel.
 
-## Architecture générale
-Caméra IP → Serveur de traitement (IA) → Base de données → Serveur web → Interface utilisateur
+## Architecture
+Caméras RTSP -> FFmpeg -> file d'images -> worker YOLO unique -> API Flask (token) -> MySQL -> interface web (Nginx HTTPS)
+Producteur/consommateur : un thread par caméra, un seul worker YOLO. Stable quel que soit le nombre de caméras (évite les crashs PyTorch multi-thread).
 
-## Rôle et réalisations
-- **Récupération du flux vidéo** : Connexion à une caméra réseau, extraction des images en temps réel (OpenCV).
-- **Analyse IA** : Entraînement d'un modèle YOLO pour détecter les trois couleurs de la colonne lumineuse. Intégration dans un script Python.
-- **Base de données** : Stockage des événements (timestamp, couleur, machine) dans une base SQL (MySQL/PostgreSQL).
-- **Serveur web** : Développement d'une API REST avec Flask pour recevoir les données et servir l'interface.
-- **Interface web** : Dashboard temps réel affichant :
-  - Flux vidéo en direct
-  - État actuel des machines
-  - Graphiques d'évolution (par jour/semaine/mois)
-  - Gestion des caméras et machines (ajout/suppression)
-  - Rapports d'activité
-- **Sécurisation** :
-  - Mise en place d'un VPN pour les communications entre caméra, serveur et base.
-  - HTTPS sur le serveur web.
-  - Protection contre injections SQL et XSS.
-  - Authentification des utilisateurs.
-  - Sécurisation du serveur Linux (pare-feu, mises à jour).
+## Fonctionnalités
+- Acquisition RTSP (H.264) via FFmpeg, reconnexion automatique
+- Détection de la colonne (YOLOv8) et de la couleur allumée
+- Association colonne/machine par marqueurs ArUco
+- Dashboard, flux caméras, historique, alertes, rapports, stats
+- Authentification avec rôles (admin / technicien / superviseur)
 
-## Compétences développées
-- Vision par ordinateur (YOLO, OpenCV)
-- Développement web backend (Flask) et frontend (HTML/CSS/JS)
-- Administration de bases de données SQL
-- Sécurité applicative et réseau (VPN, HTTPS, OWASP)
-- Gestion de projet technique
+## Sécurité applicative
+- Mots de passe hachés (scrypt + sel), SQL 100% paramétré
+- En-têtes CSP, X-Frame-Options, cookies HttpOnly/Secure/SameSite
+- Anti-force brute sur la connexion, API protégée par jeton
+- HTTPS (TLS 1.2/1.3), liaison base chiffrée en SSL
+- Limites connues documentées : pas de CSRF, limiteur en mémoire
+
+## Ma part
+Vision, IA, interface web et sécurité applicative.
 
 ## Environnement technique
-Python, Flask, YOLO, OpenCV, SQL (MySQL/PostgreSQL), Linux, HTML/CSS/JS, VPN (WireGuard/OpenVPN).` }
+Python, Flask, YOLOv8, OpenCV, FFmpeg, MySQL, Nginx, Docker Compose, pytest.` }
         } }
       } }
     }
